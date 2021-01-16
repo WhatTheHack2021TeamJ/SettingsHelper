@@ -63,24 +63,12 @@ struct LicenseDetails: View {
     var license: License
     
     var body: some View {
-        DisclosureGroup(isExpanded: $isExpanded) {
-            Text(license.fullText)
-        } label: {
-            title
-        }
-    }
-    var title: some View {
-        Button(action: {
-            withAnimation {
-                isExpanded.toggle()
-            }
-        }) {
-            Text(license.title)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
-        }
-        .buttonStyle(PlainButtonStyle())
-        // TODO: Accessibility
+        NavigationLink(
+            destination: ScrollView { Text(license.fullText).padding() }
+                .navigationTitle(license.title),
+            label: {
+                Label(license.title, systemImage: "doc")
+            })
     }
 }
 
