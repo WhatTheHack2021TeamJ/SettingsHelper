@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		5C68DF7C25B3A12A006FF5DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C68DF7B25B3A12A006FF5DF /* ContentView.swift */; };
 		5C68DF7E25B3A130006FF5DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C68DF7D25B3A130006FF5DF /* Assets.xcassets */; };
 		5C68DF8125B3A130006FF5DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C68DF8025B3A130006FF5DF /* Preview Assets.xcassets */; };
+		5C68DF9225B3A3D4006FF5DF /* SettingsHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 5C68DF9125B3A3D4006FF5DF /* SettingsHelper */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C68DF9225B3A3D4006FF5DF /* SettingsHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +40,7 @@
 			children = (
 				5C68DF7825B3A12A006FF5DF /* SettingsHelperSample */,
 				5C68DF7725B3A12A006FF5DF /* Products */,
+				5C68DF8A25B3A2DC006FF5DF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,6 +72,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		5C68DF8A25B3A2DC006FF5DF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -85,6 +95,9 @@
 			dependencies = (
 			);
 			name = SettingsHelperSample;
+			packageProductDependencies = (
+				5C68DF9125B3A3D4006FF5DF /* SettingsHelper */,
+			);
 			productName = SettingsHelperSample;
 			productReference = 5C68DF7625B3A12A006FF5DF /* SettingsHelperSample.app */;
 			productType = "com.apple.product-type.application";
@@ -326,6 +339,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5C68DF9125B3A3D4006FF5DF /* SettingsHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SettingsHelper;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5C68DF6E25B3A12A006FF5DF /* Project object */;
 }
