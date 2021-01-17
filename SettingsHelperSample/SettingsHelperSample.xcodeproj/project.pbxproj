@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,6 +21,7 @@
 		5C68DF7D25B3A130006FF5DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C68DF8025B3A130006FF5DF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5C68DF8225B3A130006FF5DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CA25D0925B3E844003AC737 /* CopyLicenses.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = CopyLicenses.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +39,7 @@
 		5C68DF6D25B3A12A006FF5DF = {
 			isa = PBXGroup;
 			children = (
+				5CA25D0925B3E844003AC737 /* CopyLicenses.swift */,
 				5C68DF7825B3A12A006FF5DF /* SettingsHelperSample */,
 				5C68DF7725B3A12A006FF5DF /* Products */,
 				5C68DF8A25B3A2DC006FF5DF /* Frameworks */,
@@ -155,6 +157,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		BA99999325B3C73600F7A403 /* Copy Licenses */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -171,7 +174,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "../.build/debug/SettingsHelperGenerator $SCRIPT_INPUT_FILE_0 $SCRIPT_OUTPUT_FILE_0\n\n";
+			shellScript = "./CopyLicenses.swift\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -8,7 +8,7 @@ public struct SettingsView: View {
                 guard let content = try? String(contentsOf: url)
                 else { return nil }
                 return License(title: url.deletingPathExtension().lastPathComponent, fullText: content)
-            }
+            }.sorted(by: { $0.title.lowercased() < $1.title.lowercased() })
         } else {
             licenses = []
         }
@@ -58,7 +58,7 @@ struct LicensesPage: View {
             ForEach(licenses) { license in
                 LicenseDetails(license: license)
             }
-        }
+        }.listStyle(InsetGroupedListStyle())
     }
 }
 
