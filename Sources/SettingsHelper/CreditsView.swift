@@ -7,31 +7,50 @@
 
 import SwiftUI
 
+public struct CreditsRow<ViewModel: CreditsViewModel>: View {
+    @ObservedObject var creditsViewModel: ViewModel
+
+    var title: LocalizedStringKey = "Credits"
+
+    public var body: some View {
+        NavigationLink(
+            destination: CreditsView(viewModel: self.creditsViewModel)
+                .navigationTitle(title),
+            label: {
+                Label(title, systemImage: "person.3")
+            })
+    }
+}
+
 public struct CreditsView<ViewModel: CreditsViewModel>: View {
-    public let credits: ViewModel
+    @ObservedObject var viewModel: ViewModel
 
     public var body: some View {
         ScrollView {
-            Text(credits.getCredits() ?? "-")
+            Text(viewModel.getCredits() ?? "-")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
         }
     }
 }
 
-public protocol CreditsViewModel {
+public protocol CreditsViewModel: ObservableObject {
     func getCredits() -> String?
 }
 
-public struct Credits: CreditsViewModel {
+public class Credits: CreditsViewModel {
     public let creditsFile: SettingsContent
+
+    public init(creditsFile: SettingsContent) {
+        self.creditsFile = creditsFile
+    }
 
     public func getCredits() -> String? {
         creditsFile.content
     }
 }
 
-struct FakeCredits: CreditsViewModel {
+class FakeCredits: CreditsViewModel {
     func getCredits() -> String? {
         "This is some Fake Credits. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
     }
@@ -41,7 +60,7 @@ public protocol SettingsContent {
     var content: String? { get }
 }
 
-public struct SettingsFile: SettingsContent {
+public struct CreditsFile: SettingsContent {
     public let resource: String
     public let fileExtension: String
 
@@ -65,6 +84,6 @@ public struct CreditsContent: SettingsContent {
 
 struct CreditsView_Previews: PreviewProvider {
     static var previews: some View {
-        CreditsView(credits: FakeCredits())
+        CreditsView(viewModel: FakeCredits())
     }
 }
