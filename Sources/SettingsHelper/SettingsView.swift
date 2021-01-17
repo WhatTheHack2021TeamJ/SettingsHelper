@@ -107,13 +107,13 @@ struct FeedbackRow: View {
     }
 }
 
-enum Feedback {
+enum Feedback: Identifiable {
     case feedback
     case reportProblem
     
-    private var contact: [String] { ["dummyEmail@email.com"] }
+    var contact: String { "dummyEmail@email.com" }
     
-    var messageContent: (subject: String, message: String?, recipient: [String]) {
+    var messageContent: (subject: String, message: String, recipient: String) {
         switch self {
         case .feedback:
             return ("Submit Feedback", "", self.contact)
@@ -121,14 +121,18 @@ enum Feedback {
             return ("Report a problem", "", self.contact)
         }
     }
+    
+    var id: Int {
+        switch self {
+        case .feedback: return 0
+        case .reportProblem: return 1
+        }
+    }
 }
 
 struct FeedbackView: View {
     
-    // Too many states?
-    @State private var showingSheet = false
     @State private var selectedOption: Feedback?
-    @State private var showingEmailComposer = false
     
     // Not sure why this needs to be included
     @State var result: Result<MFMailComposeResult, Error>? = nil
@@ -136,40 +140,30 @@ struct FeedbackView: View {
     var body: some View {
         Form {
             
-            // Should the sections be extracted to their own views?
-            
-            Section(footer: Text("Please select an option that applies to continue."), content: {
-                
+            Section {
                 Button(action: {
-                    self.showingSheet = true
+                    selectedOption = .feedback
                 }) {
-                    Text("Select an option")
+                    Label("Submit Feedback", systemImage: "envelope")
                 }
-                // This is a little ugly
-                .actionSheet(isPresented: $showingSheet) {
-                    ActionSheet(title: Text("Feedback Submission"), message: Text("What kind of feedback would you like to submit?"), buttons: [
-                        .default(Text("Report a problem"), action: {
-                            selectedOption = .reportProblem
-                        }),
-                        .default(Text("Submit feedback"), action: {
-                            selectedOption = .feedback
-                        }),
-                        .destructive(Text("Cancel"))
-                    ])
-                }
-            })
+                .disabled(!MFMailComposeViewController.canSendMail())
+                
+            }
             
             Section {
                 Button(action: {
-                    self.showingEmailComposer = true
+                    selectedOption = .reportProblem
                 }) {
-                    Text(selectedOption?.messageContent.subject ?? "Contact Developer")
+                    Label("Report a problem", systemImage: "envelope")
                 }
                 .disabled(!MFMailComposeViewController.canSendMail())
-                .sheet(isPresented: $showingEmailComposer) {
-                    MailView(result: self.$result, content: Feedback.feedback).ignoresSafeArea(edges: .all)
-                }
             }
+            
+            Section(footer: Text("Select one of the options above.\n\nYour email will be sent to") + Text(" \(Feedback.feedback.contact)").fontWeight(.bold), content: {
+                EmptyView()
+            })
+        }.sheet(item: $selectedOption) { content in
+            MailView(result: self.$result, content: content).ignoresSafeArea(edges: .all)
         }
     }
     

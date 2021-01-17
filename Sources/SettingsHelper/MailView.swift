@@ -41,11 +41,9 @@ struct MailView: UIViewControllerRepresentable {
         let vc = MFMailComposeViewController()
         vc.mailComposeDelegate = context.coordinator
         
-        vc.setToRecipients(content.messageContent.recipient)
+        vc.setToRecipients([content.messageContent.recipient])
         vc.setSubject(content.messageContent.subject)
         vc.setMessageBody(content.messageContent.message ?? "General Message", isHTML: false)
-        
-//        vc.setMessageBody("\n\n==================\nProvide us with a good description of the drink.\n\nIf you have a name include that too.\n\nWe love images also!", isHTML: false)
         return vc
     }
 
