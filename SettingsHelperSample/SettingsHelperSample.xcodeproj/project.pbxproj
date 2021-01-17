@@ -11,8 +11,7 @@
 		5C68DF7C25B3A12A006FF5DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C68DF7B25B3A12A006FF5DF /* ContentView.swift */; };
 		5C68DF7E25B3A130006FF5DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C68DF7D25B3A130006FF5DF /* Assets.xcassets */; };
 		5C68DF8125B3A130006FF5DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C68DF8025B3A130006FF5DF /* Preview Assets.xcassets */; };
-		5C68DF9225B3A3D4006FF5DF /* SettingsHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 5C68DF9125B3A3D4006FF5DF /* SettingsHelper */; };
-		BA99999D25B3CA3200F7A403 /* ButteredToast in Frameworks */ = {isa = PBXBuildFile; productRef = BA99999C25B3CA3200F7A403 /* ButteredToast */; };
+		5CA25D0125B3E3A8003AC737 /* SettingsHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 5CA25D0025B3E3A8003AC737 /* SettingsHelper */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,8 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C68DF9225B3A3D4006FF5DF /* SettingsHelper in Frameworks */,
-				BA99999D25B3CA3200F7A403 /* ButteredToast in Frameworks */,
+				5CA25D0125B3E3A8003AC737 /* SettingsHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +87,7 @@
 			buildConfigurationList = 5C68DF8525B3A130006FF5DF /* Build configuration list for PBXNativeTarget "SettingsHelperSample" */;
 			buildPhases = (
 				5C68DF7225B3A12A006FF5DF /* Sources */,
-				BA99999325B3C73600F7A403 /* ShellScript */,
+				BA99999325B3C73600F7A403 /* Copy Licenses */,
 				5C68DF7325B3A12A006FF5DF /* Frameworks */,
 				5C68DF7425B3A12A006FF5DF /* Resources */,
 			);
@@ -99,8 +97,7 @@
 			);
 			name = SettingsHelperSample;
 			packageProductDependencies = (
-				5C68DF9125B3A3D4006FF5DF /* SettingsHelper */,
-				BA99999C25B3CA3200F7A403 /* ButteredToast */,
+				5CA25D0025B3E3A8003AC737 /* SettingsHelper */,
 			);
 			productName = SettingsHelperSample;
 			productReference = 5C68DF7625B3A12A006FF5DF /* SettingsHelperSample.app */;
@@ -131,6 +128,8 @@
 			mainGroup = 5C68DF6D25B3A12A006FF5DF;
 			packageReferences = (
 				BA99999B25B3CA3200F7A403 /* XCRemoteSwiftPackageReference "ButteredToast" */,
+				5CA25CE925B3E308003AC737 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+				5CA25CED25B3E339003AC737 /* XCRemoteSwiftPackageReference "swift-nio" */,
 			);
 			productRefGroup = 5C68DF7725B3A12A006FF5DF /* Products */;
 			projectDirPath = "";
@@ -154,7 +153,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		BA99999325B3C73600F7A403 /* ShellScript */ = {
+		BA99999325B3C73600F7A403 /* Copy Licenses */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -164,6 +163,7 @@
 			inputPaths = (
 				"$(BUILD_DIR)/../../SourcePackages/checkouts/",
 			);
+			name = "Copy Licenses";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -370,6 +370,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5CA25CE925B3E308003AC737 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.2;
+			};
+		};
+		5CA25CED25B3E339003AC737 /* XCRemoteSwiftPackageReference "swift-nio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-nio.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.25.1;
+			};
+		};
 		BA99999B25B3CA3200F7A403 /* XCRemoteSwiftPackageReference "ButteredToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:Yonodactyl/ButteredToast.git";
@@ -381,14 +397,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5C68DF9125B3A3D4006FF5DF /* SettingsHelper */ = {
+		5CA25D0025B3E3A8003AC737 /* SettingsHelper */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SettingsHelper;
-		};
-		BA99999C25B3CA3200F7A403 /* ButteredToast */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BA99999B25B3CA3200F7A403 /* XCRemoteSwiftPackageReference "ButteredToast" */;
-			productName = ButteredToast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
