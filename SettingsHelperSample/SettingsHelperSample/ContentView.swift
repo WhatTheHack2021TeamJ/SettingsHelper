@@ -10,7 +10,7 @@ import SettingsHelper
 
 struct ContentView: View {
     var body: some View {
-        SettingsView(bundle: Bundle.main)
+        SettingsView(settings: SettingsConfiguration(email: "test@test.com", licenseUsage: .useGeneratedLicenses, bundle: .main))
     }
 }
 

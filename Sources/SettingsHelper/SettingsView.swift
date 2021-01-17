@@ -36,9 +36,6 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
                 topFormContent()
                 Section(header: Label("Contact", systemImage: "envelope.fill")) {
                     FeedbackRow(feedbackViewModel: self.settings.createFeedbackViewModel())
-                    Label("Something", systemImage: "circle")
-                    Label("Something", systemImage: "circle")
-                    Label("Something", systemImage: "circle")
                 }
 
                 Section(header: Label("Legal", systemImage: "books.vertical.fill")) {
@@ -52,10 +49,13 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
                     if let dataPrivacyViewModel = self.settings.createDataPrivacyViewModel() {
                         DataPrivacyRow(creditsViewModel: dataPrivacyViewModel)
                     }
-                    Label("Something", systemImage: "circle")
-                    Label("Something", systemImage: "circle")
                 }
+                
                 bottomFormContent()
+                
+                Section(footer: VersionFooterView(version: VersionFooterModel())) {
+                    EmptyView()
+                }
             }
             .navigationTitle("Settings")
         }
