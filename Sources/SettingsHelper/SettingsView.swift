@@ -1,4 +1,5 @@
 import SwiftUI
+import MessageUI
 
 public struct SettingsView: View {
     let licenses: [License]
@@ -23,8 +24,15 @@ public struct SettingsView: View {
                     Label("Something", systemImage: "circle")
                     Label("Something", systemImage: "circle")
                 }
+                
                 Section(header: Label("Legal", systemImage: "books.vertical")) {
                     LicensesRow(licenses: licenses)
+                    Label("Something", systemImage: "circle")
+                    Label("Something", systemImage: "circle")
+                }
+                
+                Section(header: Label("Feedback", systemImage: "paperplane")) {
+                    FeedbackRow()
                     Label("Something", systemImage: "circle")
                     Label("Something", systemImage: "circle")
                 }
@@ -84,6 +92,89 @@ struct LicenseDetails: View {
             })
     }
 }
+
+struct FeedbackRow: View {
+    
+    var title: LocalizedStringKey = "Feedback"
+    
+    var body: some View {
+        NavigationLink(
+            destination: FeedbackView()
+                .navigationTitle(title),
+            label: {
+                Label(title, systemImage: "circle")
+            })
+    }
+}
+
+enum Feedback {
+    case feedback
+    case reportProblem
+    
+    private var contact: [String] { ["dummyEmail@email.com"] }
+    
+    var messageContent: (subject: String, message: String?, recipient: [String]) {
+        switch self {
+        case .feedback:
+            return ("Submit Feedback", "", self.contact)
+        case .reportProblem:
+            return ("Report a problem", "", self.contact)
+        }
+    }
+}
+
+struct FeedbackView: View {
+    
+    // Too many states?
+    @State private var showingSheet = false
+    @State private var selectedOption: Feedback?
+    @State private var showingEmailComposer = false
+    
+    // Not sure why this needs to be included
+    @State var result: Result<MFMailComposeResult, Error>? = nil
+    
+    var body: some View {
+        Form {
+            
+            // Should the sections be extracted to their own views?
+            
+            Section(footer: Text("Please select an option that applies to continue."), content: {
+                
+                Button(action: {
+                    self.showingSheet = true
+                }) {
+                    Text("Select an option")
+                }
+                // This is a little ugly
+                .actionSheet(isPresented: $showingSheet) {
+                    ActionSheet(title: Text("Feedback Submission"), message: Text("What kind of feedback would you like to submit?"), buttons: [
+                        .default(Text("Report a problem"), action: {
+                            selectedOption = .reportProblem
+                        }),
+                        .default(Text("Submit feedback"), action: {
+                            selectedOption = .feedback
+                        }),
+                        .destructive(Text("Cancel"))
+                    ])
+                }
+            })
+            
+            Section {
+                Button(action: {
+                    self.showingEmailComposer = true
+                }) {
+                    Text(selectedOption?.messageContent.subject ?? "Contact Developer")
+                }
+                .disabled(!MFMailComposeViewController.canSendMail())
+                .sheet(isPresented: $showingEmailComposer) {
+                    MailView(result: self.$result, content: Feedback.feedback).ignoresSafeArea(edges: .all)
+                }
+            }
+        }
+    }
+    
+}
+
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
