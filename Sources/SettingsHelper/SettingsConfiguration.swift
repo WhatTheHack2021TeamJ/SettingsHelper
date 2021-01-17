@@ -15,17 +15,23 @@ public enum CreditsOption {
     case useCredits(SettingsContent), none
 }
 
+public enum DataPrivacyOption {
+    case useDataPrivacy(SettingsContent), none
+}
+
 public class SettingsConfiguration {
     public var bundle: Bundle
     public var licenseUsage: LicenseOption
     public var email: String
     public var creditsUsage: CreditsOption
+    public var dataPrivacyUsage: DataPrivacyOption
 
-    public init(email: String, licenseUsage: LicenseOption = .useGeneratedLicenses, bundle: Bundle = .main, creditsUsage: CreditsOption = .none) {
+    public init(email: String, licenseUsage: LicenseOption = .useGeneratedLicenses, bundle: Bundle = .main, creditsUsage: CreditsOption = .none, dataPrivacyUsage: DataPrivacyOption = .none) {
         self.email = email
         self.licenseUsage = licenseUsage
         self.bundle = bundle
         self.creditsUsage = creditsUsage
+        self.dataPrivacyUsage = dataPrivacyUsage
     }
 
     var shouldShowLicense: Bool {
@@ -45,10 +51,19 @@ public class SettingsConfiguration {
         return FeedbackViewModel(contact: self.email)
     }
 
-    func createCreditsViewModel() -> Credits? {
+    func createCreditsViewModel() -> FileTextContentViewModel? {
         switch self.creditsUsage {
         case .useCredits(let settingsContent):
-            return Credits(creditsFile: settingsContent)
+            return FileTextContentViewModel(file: settingsContent)
+        case .none:
+            return nil
+        }
+    }
+
+    func createDataPrivacyViewModel() -> FileTextContentViewModel? {
+        switch self.dataPrivacyUsage {
+        case .useDataPrivacy(let settingsContent):
+            return FileTextContentViewModel(file: settingsContent)
         case .none:
             return nil
         }
