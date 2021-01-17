@@ -23,7 +23,7 @@ public struct CreditsRow<ViewModel: CreditsViewModel>: View {
 }
 
 public struct CreditsView<ViewModel: CreditsViewModel>: View {
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject public var viewModel: ViewModel
 
     public var body: some View {
         ScrollView {

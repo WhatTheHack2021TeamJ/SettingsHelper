@@ -1,17 +1,26 @@
 import SwiftUI
 
-public struct SettingsView: View {
+public struct SettingsView<Content: View>: View {
     private let settings: SettingsConfiguration
+    private let content: () -> Content
+
+    public init(settings: SettingsConfiguration) where Content == EmptyView {
+        self.settings = settings
+        self.content = { EmptyView() }
+    }
 
     public init(
-        settings: SettingsConfiguration
+        settings: SettingsConfiguration,
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.settings = settings
+        self.content = content
     }
 
     public var body: some View {
         NavigationView {
             Form {
+                content()
                 Section(header: Label("Contact", systemImage: "envelope.fill")) {
                     FeedbackRow(feedbackViewModel: self.settings.createFeedbackViewModel())
                     Label("Something", systemImage: "circle")
