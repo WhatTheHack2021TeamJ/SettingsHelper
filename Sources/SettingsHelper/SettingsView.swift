@@ -1,26 +1,39 @@
 import SwiftUI
 
-public struct SettingsView<Content: View>: View {
+public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View {
     private let settings: SettingsConfiguration
-    private let content: () -> Content
+    private let topFormContent: () -> TopFormContent
+    private let bottomFormContent: () -> BottomFormContent
 
-    public init(settings: SettingsConfiguration) where Content == EmptyView {
+    public init(settings: SettingsConfiguration) where TopFormContent == EmptyView, BottomFormContent == EmptyView {
         self.settings = settings
-        self.content = { EmptyView() }
+        self.topFormContent = { EmptyView() }
+        self.bottomFormContent = { EmptyView() }
     }
 
     public init(
         settings: SettingsConfiguration,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder topFormContent: @escaping () -> TopFormContent
+    ) where BottomFormContent == EmptyView {
+        self.settings = settings
+        self.topFormContent = topFormContent
+        self.bottomFormContent = { EmptyView() }
+    }
+
+    public init(
+        settings: SettingsConfiguration,
+        @ViewBuilder topFormContent: @escaping () -> TopFormContent,
+        @ViewBuilder bottomFormContent: @escaping () -> BottomFormContent
     ) {
         self.settings = settings
-        self.content = content
+        self.topFormContent = topFormContent
+        self.bottomFormContent = bottomFormContent
     }
 
     public var body: some View {
         NavigationView {
             Form {
-                content()
+                topFormContent()
                 Section(header: Label("Contact", systemImage: "envelope.fill")) {
                     FeedbackRow(feedbackViewModel: self.settings.createFeedbackViewModel())
                     Label("Something", systemImage: "circle")
@@ -39,6 +52,7 @@ public struct SettingsView<Content: View>: View {
                     Label("Something", systemImage: "circle")
                     Label("Something", systemImage: "circle")
                 }
+                bottomFormContent()
             }
             .navigationTitle("Settings")
         }
@@ -50,6 +64,8 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(
             settings: SettingsConfiguration(
-                email: "settings@whatthehack.com", creditsUsage: .useCredits(CreditsContent(content: "Test"))))
+                email: "settings@whatthehack.com", creditsUsage: .useCredits(CreditsContent(content: "Test")))) {
+            Text("Top")
+        }
     }
 }
