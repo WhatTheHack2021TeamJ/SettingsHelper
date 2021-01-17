@@ -24,17 +24,27 @@ You'll want to include some individual details in this initializer.
 To create your configuration you'll create something like this:
 
 ```swift
-SettingsView(
-    settings: SettingsConfiguration(
-    email: "test@test.com",
-    licenseUsage: .useGeneratedLicenses,
-    bundle: .main,
-    creditsUsage: .useCredits(StaticTextContent(content: "Thanks to everyone at WhatTheHack 2021 Hackathon 😊🎉")),
-    dataPrivacyUsage: .useDataPrivacy(StaticTextContent(content: "We sell all your data.")),
-    questionsAndAnswers:
-        [QuestionAndAnswer(title: "Who will win the prizes?", content: "Good question. That will be the settings framework.")]
-    )
-)
+struct ContentView: View {
+
+    var body: some View {
+    
+        ZStack {
+        
+            SettingsView(settings:
+                SettingsConfiguration(
+                    email: "test@test.com",
+                    licenseUsage: .useGeneratedLicenses,
+                    bundle: .main,
+                    creditsUsage: .useCredits(StaticTextContent(content: "Thanks to everyone at WhatTheHack 2021 Hackathon 😊🎉")),
+                    dataPrivacyUsage: .useDataPrivacy(StaticTextContent(content: "We sell all your data.")),
+                    questionsAndAnswers:
+                        [QuestionAndAnswer(title: "Who will win the prizes?", content: "Good question. That will be the settings framework.")]
+                )
+            )
+        }
+        
+    }
+}
 ```
 
 Let's look at each parameter a littler closer.
