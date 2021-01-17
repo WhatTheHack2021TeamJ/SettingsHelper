@@ -77,7 +77,7 @@ The QuestionAndAnswers will contain `title` and `content` parameters. Excluding 
 
 ## Screenshots
 
-<img src="https://user-images.githubusercontent.com/18172931/104855012-2a40c480-58d8-11eb-92b0-a5b706b8446e.png" width="200" height="400" />
+<img src="https://user-images.githubusercontent.com/18172931/104855012-2a40c480-58d8-11eb-92b0-a5b706b8446e.png" height="400" />
 
 ## Automatic LICENSE file handling
 
@@ -85,7 +85,7 @@ This framework can automatically copy the LICENSE files to your app when buildin
 
 To do this, add a *New Run Script Phase* in your *Build Phases* and use the following command: `${BUILD_DIR}/../../SourcePackages/checkouts/SettingsHelper/Sources/SettingsHelperGenerator/main.swift`
 
-<img src="assets/SettingsHelper Copy Licenses Run Script.png" width="400">
+<img src="assets/SettingsHelper Copy Licenses Run Script.png" width="600">
 
 
 
