@@ -12,6 +12,7 @@
 		5C68DF7E25B3A130006FF5DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C68DF7D25B3A130006FF5DF /* Assets.xcassets */; };
 		5C68DF8125B3A130006FF5DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C68DF8025B3A130006FF5DF /* Preview Assets.xcassets */; };
 		5C68DF9225B3A3D4006FF5DF /* SettingsHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 5C68DF9125B3A3D4006FF5DF /* SettingsHelper */; };
+		BA99999D25B3CA3200F7A403 /* ButteredToast in Frameworks */ = {isa = PBXBuildFile; productRef = BA99999C25B3CA3200F7A403 /* ButteredToast */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C68DF9225B3A3D4006FF5DF /* SettingsHelper in Frameworks */,
+				BA99999D25B3CA3200F7A403 /* ButteredToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +89,7 @@
 			buildConfigurationList = 5C68DF8525B3A130006FF5DF /* Build configuration list for PBXNativeTarget "SettingsHelperSample" */;
 			buildPhases = (
 				5C68DF7225B3A12A006FF5DF /* Sources */,
+				BA99999325B3C73600F7A403 /* ShellScript */,
 				5C68DF7325B3A12A006FF5DF /* Frameworks */,
 				5C68DF7425B3A12A006FF5DF /* Resources */,
 			);
@@ -97,6 +100,7 @@
 			name = SettingsHelperSample;
 			packageProductDependencies = (
 				5C68DF9125B3A3D4006FF5DF /* SettingsHelper */,
+				BA99999C25B3CA3200F7A403 /* ButteredToast */,
 			);
 			productName = SettingsHelperSample;
 			productReference = 5C68DF7625B3A12A006FF5DF /* SettingsHelperSample.app */;
@@ -125,6 +129,9 @@
 				Base,
 			);
 			mainGroup = 5C68DF6D25B3A12A006FF5DF;
+			packageReferences = (
+				BA99999B25B3CA3200F7A403 /* XCRemoteSwiftPackageReference "ButteredToast" */,
+			);
 			productRefGroup = 5C68DF7725B3A12A006FF5DF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -145,6 +152,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BA99999325B3C73600F7A403 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"~ENV~\"\necho $BUILD_DIR\necho $DERIVED_FILES_DIR\necho \"~ENV~\"\n\ncd ..\n.build/x86_64-apple-macosx/debug/SettingsHelperGenerator $BUILD_DIR $DERIVED_FILES_DIR\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5C68DF7225B3A12A006FF5DF /* Sources */ = {
@@ -340,10 +367,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		BA99999B25B3CA3200F7A403 /* XCRemoteSwiftPackageReference "ButteredToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:Yonodactyl/ButteredToast.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		5C68DF9125B3A3D4006FF5DF /* SettingsHelper */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SettingsHelper;
+		};
+		BA99999C25B3CA3200F7A403 /* ButteredToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA99999B25B3CA3200F7A403 /* XCRemoteSwiftPackageReference "ButteredToast" */;
+			productName = ButteredToast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
