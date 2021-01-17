@@ -11,16 +11,21 @@ public enum LicenseOption {
     case useGeneratedLicenses, none
 }
 
+public enum CreditsOption {
+    case useCredits(SettingsContent), none
+}
 
 public class SettingsConfiguration {
     public var bundle: Bundle
     public var licenseUsage: LicenseOption
     public var email: String
+    public var creditsUsage: CreditsOption
 
-    public init(email: String, licenseUsage: LicenseOption = .useGeneratedLicenses, bundle: Bundle = .main) {
+    public init(email: String, licenseUsage: LicenseOption = .useGeneratedLicenses, bundle: Bundle = .main, creditsUsage: CreditsOption = .none) {
         self.email = email
         self.licenseUsage = licenseUsage
         self.bundle = bundle
+        self.creditsUsage = creditsUsage
     }
 
     var shouldShowLicense: Bool {
@@ -38,6 +43,15 @@ public class SettingsConfiguration {
 
     func createFeedbackViewModel() -> FeedbackViewModel {
         return FeedbackViewModel(contact: self.email)
+    }
+
+    func createCreditsViewModel() -> Credits? {
+        switch self.creditsUsage {
+        case .useCredits(let settingsContent):
+            return Credits(creditsFile: settingsContent)
+        case .none:
+            return nil
+        }
     }
 }
 
