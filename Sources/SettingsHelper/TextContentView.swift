@@ -7,14 +7,29 @@
 
 import SwiftUI
 
-public struct CreditsRow<ViewModel: CreditsViewModel>: View {
+public struct DataPrivacyRow<ViewModel: TextContentViewModel>: View {
+    @ObservedObject var creditsViewModel: ViewModel
+
+    var title: LocalizedStringKey = "Data Privacy"
+
+    public var body: some View {
+        NavigationLink(
+            destination: TextContentView(viewModel: self.creditsViewModel)
+                .navigationTitle(title),
+            label: {
+                Label(title, systemImage: "checkmark.shield")
+            })
+    }
+}
+
+public struct CreditsRow<ViewModel: TextContentViewModel>: View {
     @ObservedObject var creditsViewModel: ViewModel
 
     var title: LocalizedStringKey = "Credits"
 
     public var body: some View {
         NavigationLink(
-            destination: CreditsView(viewModel: self.creditsViewModel)
+            destination: TextContentView(viewModel: self.creditsViewModel)
                 .navigationTitle(title),
             label: {
                 Label(title, systemImage: "person.3")
@@ -22,8 +37,8 @@ public struct CreditsRow<ViewModel: CreditsViewModel>: View {
     }
 }
 
-public struct CreditsView<ViewModel: CreditsViewModel>: View {
-    @ObservedObject public var viewModel: ViewModel
+public struct TextContentView<ViewModel: TextContentViewModel>: View {
+    @ObservedObject var viewModel: ViewModel
 
     public var body: some View {
         ScrollView {
@@ -34,23 +49,23 @@ public struct CreditsView<ViewModel: CreditsViewModel>: View {
     }
 }
 
-public protocol CreditsViewModel: ObservableObject {
+public protocol TextContentViewModel: ObservableObject {
     func getCredits() -> String?
 }
 
-public class Credits: CreditsViewModel {
-    public let creditsFile: SettingsContent
+public class FileTextContentViewModel: TextContentViewModel {
+    public let file: SettingsContent
 
-    public init(creditsFile: SettingsContent) {
-        self.creditsFile = creditsFile
+    public init(file: SettingsContent) {
+        self.file = file
     }
 
     public func getCredits() -> String? {
-        creditsFile.content
+        file.content
     }
 }
 
-class FakeCredits: CreditsViewModel {
+class StaticTextContentViewModel: TextContentViewModel {
     func getCredits() -> String? {
         "This is some Fake Credits. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
     }
@@ -60,7 +75,7 @@ public protocol SettingsContent {
     var content: String? { get }
 }
 
-public struct CreditsFile: SettingsContent {
+public struct SettingsFile: SettingsContent {
     public let resource: String
     public let fileExtension: String
 
@@ -84,6 +99,6 @@ public struct CreditsContent: SettingsContent {
 
 struct CreditsView_Previews: PreviewProvider {
     static var previews: some View {
-        CreditsView(viewModel: FakeCredits())
+        TextContentView(viewModel: StaticTextContentViewModel())
     }
 }
