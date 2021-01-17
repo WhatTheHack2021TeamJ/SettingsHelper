@@ -22,6 +22,6 @@ let package = Package(
             dependencies: []),
         .target(
             name: "SettingsHelperGenerator",
-            dependencies: ["SettingsHelper"])
+            dependencies: [])
     ]
 )

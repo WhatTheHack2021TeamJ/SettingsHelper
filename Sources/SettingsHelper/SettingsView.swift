@@ -1,7 +1,19 @@
 import SwiftUI
 
 public struct SettingsView: View {
-    public init() {}
+    let licenses: [License]
+    public init(bundle: Bundle) {
+        if let urls = bundle.urls(forResourcesWithExtension: "license", subdirectory: "licenses") {
+            licenses = urls.compactMap { url -> License? in
+                guard let content = try? String(contentsOf: url)
+                else { return nil }
+                return License(title: url.deletingPathExtension().lastPathComponent, fullText: content)
+            }
+        } else {
+            licenses = []
+        }
+        
+    }
     
     public var body: some View {
         NavigationView {
@@ -12,10 +24,7 @@ public struct SettingsView: View {
                     Label("Something", systemImage: "circle")
                 }
                 Section(header: Label("Legal", systemImage: "books.vertical")) {
-                    LicensesRow(licenses: [
-                        License(title: "SettingsHelper", fullText: mit),
-                        License(title: "Something else", fullText: mit)
-                    ])
+                    LicensesRow(licenses: licenses)
                     Label("Something", systemImage: "circle")
                     Label("Something", systemImage: "circle")
                 }
@@ -23,6 +32,10 @@ public struct SettingsView: View {
             .navigationTitle("Settings")
         }
     }
+}
+
+func loadLicenses(_ bundle: Bundle) -> [License] {
+    []
 }
 
 struct LicensesRow: View {
@@ -74,7 +87,7 @@ struct LicenseDetails: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(bundle: .main)
     }
 }
 

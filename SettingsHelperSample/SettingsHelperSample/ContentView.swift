@@ -10,12 +10,12 @@ import SettingsHelper
 
 struct ContentView: View {
     var body: some View {
-        SettingsView()
+        SettingsView(bundle: Bundle.main)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SettingsView()
+//    }
+//}

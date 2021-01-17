@@ -1,19 +1,13 @@
 import Foundation
 
-if #available(macOS 11, *) {
-    let buildDirFromArgs = CommandLine.arguments[1]
+if true {
+    guard CommandLine.arguments.count > 2
+    else { fatalError("Usage: <binary> <checkouts_dir> <output>") }
+    let projectDir = CommandLine.arguments[1]
     let buildOutputDir = CommandLine.arguments[2]
 
-    print(buildDirFromArgs)
-
-    let projectDir = URL(fileURLWithPath: buildDirFromArgs)
-        .deletingLastPathComponent() // Delete Products
-        .deletingLastPathComponent() // Delete Build
-        .appendingPathComponent("SourcePackages", isDirectory: true)
-        .appendingPathComponent("checkouts", isDirectory: true)
-        .path
-
-    print(projectDir)
+    print("input", projectDir)
+    print("output", buildOutputDir)
 
     let projects = try! FileManager.default.contentsOfDirectory(atPath: projectDir)
 
@@ -48,8 +42,7 @@ if #available(macOS 11, *) {
             return License(projectName: url.lastPathComponent, licenseFilePath: licenseFilePath)
     })
 
-    var licenseUrlInCopyResources = URL(fileURLWithPath: buildOutputDir)
-    licenseUrlInCopyResources.appendPathComponent("licensesFromAmazingSettingsFrameworks", isDirectory: true)
+    let licenseUrlInCopyResources = URL(fileURLWithPath: buildOutputDir)
 
     if !FileManager.default.fileExists(atPath: licenseUrlInCopyResources.path) {
         try! FileManager.default.createDirectory(at: licenseUrlInCopyResources, withIntermediateDirectories: false, attributes: nil)

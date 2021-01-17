@@ -162,14 +162,16 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(BUILD_DIR)/../../SourcePackages/checkouts/",
 			);
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/licenses",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"~ENV~\"\necho $BUILD_DIR\necho $DERIVED_FILES_DIR\necho \"~ENV~\"\n\ncd ..\n.build/x86_64-apple-macosx/debug/SettingsHelperGenerator $BUILD_DIR $DERIVED_FILES_DIR\n\n";
+			shellScript = "../.build/debug/SettingsHelperGenerator $SCRIPT_INPUT_FILE_0 $SCRIPT_OUTPUT_FILE_0\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
