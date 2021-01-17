@@ -56,14 +56,14 @@ if #available(macOS 11, *) {
     }
 
 
-    print(licenseFilesPath)
 
     licenseFilesPath.forEach({ license in
-        let targetFilePath = licenseUrlInCopyResources.appendingPathComponent(license.projectName + ".txt")
+        let targetFilePath = licenseUrlInCopyResources.appendingPathComponent(license.projectName + ".license")
         if FileManager.default.fileExists(atPath: targetFilePath.path) {
             //            FileManager.default.removeItem(atPath: targetFilePath.path)
             return
         }
+        print("Copying \(license.projectName)")
         try! FileManager.default.copyItem(at: URL(fileURLWithPath: license.licenseFilePath), to: targetFilePath)
     })
 
