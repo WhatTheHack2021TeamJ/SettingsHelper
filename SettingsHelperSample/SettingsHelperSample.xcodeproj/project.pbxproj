@@ -12,6 +12,7 @@
 		5C68DF7E25B3A130006FF5DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C68DF7D25B3A130006FF5DF /* Assets.xcassets */; };
 		5C68DF8125B3A130006FF5DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C68DF8025B3A130006FF5DF /* Preview Assets.xcassets */; };
 		5CA25D0125B3E3A8003AC737 /* SettingsHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 5CA25D0025B3E3A8003AC737 /* SettingsHelper */; };
+		BA6B671B25B4B83C007C7174 /* ConfettiView in Frameworks */ = {isa = PBXBuildFile; productRef = BA6B671A25B4B83C007C7174 /* ConfettiView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CA25D0125B3E3A8003AC737 /* SettingsHelper in Frameworks */,
+				BA6B671B25B4B83C007C7174 /* ConfettiView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +102,7 @@
 			name = SettingsHelperSample;
 			packageProductDependencies = (
 				5CA25D0025B3E3A8003AC737 /* SettingsHelper */,
+				BA6B671A25B4B83C007C7174 /* ConfettiView */,
 			);
 			productName = SettingsHelperSample;
 			productReference = 5C68DF7625B3A12A006FF5DF /* SettingsHelperSample.app */;
@@ -132,6 +135,7 @@
 				BA99999B25B3CA3200F7A403 /* XCRemoteSwiftPackageReference "ButteredToast" */,
 				5CA25CE925B3E308003AC737 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 				5CA25CED25B3E339003AC737 /* XCRemoteSwiftPackageReference "swift-nio" */,
+				BA6B671925B4B83C007C7174 /* XCRemoteSwiftPackageReference "ConfettiView" */,
 			);
 			productRefGroup = 5C68DF7725B3A12A006FF5DF /* Products */;
 			projectDirPath = "";
@@ -164,17 +168,15 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(BUILD_DIR)/../../SourcePackages/checkouts/",
 			);
 			name = "Copy Licenses";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/licenses",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./CopyLicenses.swift\n";
+			shellScript = "./CopyLicenses.swift\n# ${BUILD_DIR}/../../SourcePackages/checkouts/SettingsHelper/Sources/SettingsHelperGenerator/main.swift\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -315,7 +317,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 500;
 				DEVELOPMENT_ASSET_PATHS = "\"SettingsHelperSample/Preview Content\"";
-				DEVELOPMENT_TEAM = 4CR77PCW63;
+				DEVELOPMENT_TEAM = RLZ3HXUMSR;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SettingsHelperSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -339,7 +341,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 500;
 				DEVELOPMENT_ASSET_PATHS = "\"SettingsHelperSample/Preview Content\"";
-				DEVELOPMENT_TEAM = 4CR77PCW63;
+				DEVELOPMENT_TEAM = RLZ3HXUMSR;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SettingsHelperSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -395,6 +397,14 @@
 				minimumVersion = 2.25.1;
 			};
 		};
+		BA6B671925B4B83C007C7174 /* XCRemoteSwiftPackageReference "ConfettiView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:ziligy/ConfettiView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
 		BA99999B25B3CA3200F7A403 /* XCRemoteSwiftPackageReference "ButteredToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:Yonodactyl/ButteredToast.git";
@@ -409,6 +419,11 @@
 		5CA25D0025B3E3A8003AC737 /* SettingsHelper */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SettingsHelper;
+		};
+		BA6B671A25B4B83C007C7174 /* ConfettiView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA6B671925B4B83C007C7174 /* XCRemoteSwiftPackageReference "ConfettiView" */;
+			productName = ConfettiView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "ConfettiView",
+        "repositoryURL": "git@github.com:ziligy/ConfettiView.git",
+        "state": {
+          "branch": null,
+          "revision": "c5787afc61442364bddbdff5ce86c8c710d1ec3f",
+          "version": "1.0.1"
+        }
+      },
+      {
         "package": "swift-nio",
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {

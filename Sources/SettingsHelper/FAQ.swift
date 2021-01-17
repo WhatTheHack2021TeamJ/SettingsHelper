@@ -26,6 +26,11 @@ public struct QuestionAndAnswer: Identifiable {
     public let title: String
     public let content: String
 
+    public init(title: String, content: String) {
+        self.title = title
+        self.content = content
+    }
+
     public var id: String { title }
 }
 
