@@ -1,6 +1,6 @@
 ![settingsHelperLogo](./logo.png)
     
-# WhatTheHack2021
+# Settings Helper
 
 WhatTheHack Hackathon was a 24 hacking-hour adventure crafted by Cyril Garcia and Ting Becker. All together teams paired up and crafted some beautiful and very useful ideas.
 
