@@ -49,6 +49,9 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
                     if let dataPrivacyViewModel = self.settings.createDataPrivacyViewModel() {
                         DataPrivacyRow(creditsViewModel: dataPrivacyViewModel)
                     }
+                    if let questionsAndAnswersViewModel = self.settings.createQuestionAndAnswerViewModel() {
+                        AllQuestionAndAnswersRowView(viewModel: questionsAndAnswersViewModel)
+                    }
                 }
                 
                 bottomFormContent()
@@ -69,7 +72,10 @@ struct SettingsView_Previews: PreviewProvider {
             settings: SettingsConfiguration(
                 email: "settings@whatthehack.com",
                 creditsUsage: .useCredits(CreditsContent(content: "Test")),
-                dataPrivacyUsage: .useDataPrivacy(CreditsContent(content: "Data Privacy"))))
+                dataPrivacyUsage: .useDataPrivacy(CreditsContent(content: "Data Privacy")),
+                questionsAndAnswers: [
+                    QuestionAndAnswer(title: "What is this?", content: "This is a test.")
+                ]))
             .environment(\.colorScheme, .dark)
     }
 }

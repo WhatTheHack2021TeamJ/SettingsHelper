@@ -25,13 +25,15 @@ public class SettingsConfiguration {
     public var email: String
     public var creditsUsage: CreditsOption
     public var dataPrivacyUsage: DataPrivacyOption
+    public var questionsAndAnswers: [QuestionAndAnswer]
 
-    public init(email: String, licenseUsage: LicenseOption = .useGeneratedLicenses, bundle: Bundle = .main, creditsUsage: CreditsOption = .none, dataPrivacyUsage: DataPrivacyOption = .none) {
+    public init(email: String, licenseUsage: LicenseOption = .useGeneratedLicenses, bundle: Bundle = .main, creditsUsage: CreditsOption = .none, dataPrivacyUsage: DataPrivacyOption = .none, questionsAndAnswers: [QuestionAndAnswer] = []) {
         self.email = email
         self.licenseUsage = licenseUsage
         self.bundle = bundle
         self.creditsUsage = creditsUsage
         self.dataPrivacyUsage = dataPrivacyUsage
+        self.questionsAndAnswers = questionsAndAnswers
     }
 
     var shouldShowLicense: Bool {
@@ -67,6 +69,11 @@ public class SettingsConfiguration {
         case .none:
             return nil
         }
+    }
+
+    func createQuestionAndAnswerViewModel() -> QuestionAndAnswerViewModel? {
+        guard self.questionsAndAnswers.count > 0 else { return nil }
+        return QuestionAndAnswerViewModel(questionAndAnswers: self.questionsAndAnswers)
     }
 }
 
