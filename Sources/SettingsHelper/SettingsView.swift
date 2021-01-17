@@ -1,17 +1,39 @@
 import SwiftUI
 
-public struct SettingsView: View {
+public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View {
     private let settings: SettingsConfiguration
+    private let topFormContent: () -> TopFormContent
+    private let bottomFormContent: () -> BottomFormContent
+
+    public init(settings: SettingsConfiguration) where TopFormContent == EmptyView, BottomFormContent == EmptyView {
+        self.settings = settings
+        self.topFormContent = { EmptyView() }
+        self.bottomFormContent = { EmptyView() }
+    }
 
     public init(
-        settings: SettingsConfiguration
+        settings: SettingsConfiguration,
+        @ViewBuilder topFormContent: @escaping () -> TopFormContent
+    ) where BottomFormContent == EmptyView {
+        self.settings = settings
+        self.topFormContent = topFormContent
+        self.bottomFormContent = { EmptyView() }
+    }
+
+    public init(
+        settings: SettingsConfiguration,
+        @ViewBuilder topFormContent: @escaping () -> TopFormContent,
+        @ViewBuilder bottomFormContent: @escaping () -> BottomFormContent
     ) {
         self.settings = settings
+        self.topFormContent = topFormContent
+        self.bottomFormContent = bottomFormContent
     }
 
     public var body: some View {
         NavigationView {
             Form {
+                topFormContent()
                 Section(header: Label("Contact", systemImage: "envelope.fill")) {
                     FeedbackRow(feedbackViewModel: self.settings.createFeedbackViewModel())
                     Label("Something", systemImage: "circle")
@@ -33,6 +55,7 @@ public struct SettingsView: View {
                     Label("Something", systemImage: "circle")
                     Label("Something", systemImage: "circle")
                 }
+                bottomFormContent()
             }
             .navigationTitle("Settings")
         }
