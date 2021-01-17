@@ -1,3 +1,5 @@
+![settingsHelperLogo](./logo.png)
+    
 # WhatTheHack2021
 
 WhatTheHack Hackathon was a 24 hacking-hour adventure crafted by Cyril Garcia and Ting Becker. All together teams paired up and crafted some beautiful and very useful ideas.
@@ -62,6 +64,11 @@ The DataPrivacyOptions will either be `.none` or `.useDataPrivacy()`. If you cho
 ##### `questionsAndAnswers`
 
 The QuestionAndAnswers will contain `title` and `content` parameters. Excluding this will result in the framework not including an FAQ.
+
+## Screenshots
+
+<img src="https://user-images.githubusercontent.com/18172931/104855012-2a40c480-58d8-11eb-92b0-a5b706b8446e.png" width="200" height="400" />
+
 
 ## Support
 
