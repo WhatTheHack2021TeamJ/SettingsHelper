@@ -1,4 +1,5 @@
 import SwiftUI
+import MessageUI
 
 public struct SettingsView: View {
     let licenses: [License]
@@ -23,8 +24,15 @@ public struct SettingsView: View {
                     Label("Something", systemImage: "circle")
                     Label("Something", systemImage: "circle")
                 }
+                
                 Section(header: Label("Legal", systemImage: "books.vertical")) {
                     LicensesRow(licenses: licenses)
+                    Label("Something", systemImage: "circle")
+                    Label("Something", systemImage: "circle")
+                }
+                
+                Section(header: Label("Feedback", systemImage: "paperplane")) {
+                    FeedbackRow()
                     Label("Something", systemImage: "circle")
                     Label("Something", systemImage: "circle")
                 }
@@ -84,6 +92,83 @@ struct LicenseDetails: View {
             })
     }
 }
+
+struct FeedbackRow: View {
+    
+    var title: LocalizedStringKey = "Feedback"
+    
+    var body: some View {
+        NavigationLink(
+            destination: FeedbackView()
+                .navigationTitle(title),
+            label: {
+                Label(title, systemImage: "circle")
+            })
+    }
+}
+
+enum Feedback: Identifiable {
+    case feedback
+    case reportProblem
+    
+    var contact: String { "dummyEmail@email.com" }
+    
+    var messageContent: (subject: String, message: String, recipient: String) {
+        switch self {
+        case .feedback:
+            return ("Submit Feedback", "", self.contact)
+        case .reportProblem:
+            return ("Report a problem", "", self.contact)
+        }
+    }
+    
+    var id: Int {
+        switch self {
+        case .feedback: return 0
+        case .reportProblem: return 1
+        }
+    }
+}
+
+struct FeedbackView: View {
+    
+    @State private var selectedOption: Feedback?
+    
+    // Not sure why this needs to be included
+    @State var result: Result<MFMailComposeResult, Error>? = nil
+    
+    var body: some View {
+        Form {
+            
+            Section {
+                Button(action: {
+                    selectedOption = .feedback
+                }) {
+                    Label("Submit Feedback", systemImage: "envelope")
+                }
+                .disabled(!MFMailComposeViewController.canSendMail())
+                
+            }
+            
+            Section {
+                Button(action: {
+                    selectedOption = .reportProblem
+                }) {
+                    Label("Report a problem", systemImage: "envelope")
+                }
+                .disabled(!MFMailComposeViewController.canSendMail())
+            }
+            
+            Section(footer: Text("Select one of the options above.\n\nYour email will be sent to") + Text(" \(Feedback.feedback.contact)").fontWeight(.bold), content: {
+                EmptyView()
+            })
+        }.sheet(item: $selectedOption) { content in
+            MailView(result: self.$result, content: content).ignoresSafeArea(edges: .all)
+        }
+    }
+    
+}
+
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
