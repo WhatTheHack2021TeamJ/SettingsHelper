@@ -5,7 +5,7 @@ struct MailView: UIViewControllerRepresentable {
 
     @Environment(\.presentationMode) var presentation
     @Binding var result: Result<MFMailComposeResult, Error>?
-    var content: Feedback
+    var viewModel: MailViewModel
 
     class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
 
@@ -40,10 +40,10 @@ struct MailView: UIViewControllerRepresentable {
     func makeUIViewController(context: UIViewControllerRepresentableContext<MailView>) -> MFMailComposeViewController {
         let vc = MFMailComposeViewController()
         vc.mailComposeDelegate = context.coordinator
-        
-        vc.setToRecipients([content.messageContent.recipient])
-        vc.setSubject(content.messageContent.subject)
-        vc.setMessageBody(content.messageContent.message ?? "General Message", isHTML: false)
+        let content = self.viewModel.messageContent()
+        vc.setToRecipients([content.recipient])
+        vc.setSubject(content.subject)
+        vc.setMessageBody(content.message, isHTML: false)
         return vc
     }
 

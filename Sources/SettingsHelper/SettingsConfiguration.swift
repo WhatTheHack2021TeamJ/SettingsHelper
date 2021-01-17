@@ -13,8 +13,32 @@ public enum LicenseOption {
 
 
 public class SettingsConfiguration {
-    public var bundle: Bundle = .main
-    public var licenseUsage: LicenseOption = .useGeneratedLicenses
+    public var bundle: Bundle
+    public var licenseUsage: LicenseOption
+    public var email: String
+
+    public init(email: String, licenseUsage: LicenseOption = .useGeneratedLicenses, bundle: Bundle = .main) {
+        self.email = email
+        self.licenseUsage = licenseUsage
+        self.bundle = bundle
+    }
+
+    var shouldShowLicense: Bool {
+        switch self.licenseUsage {
+        case .none:
+            return false
+        case .useGeneratedLicenses:
+            return true
+        }
+    }
+
+    func createLicenseViewModel() -> LicenseViewModel {
+        return LicenseViewModel(licenseUsage: self.licenseUsage, bundle: self.bundle)
+    }
+
+    func createFeedbackViewModel() -> FeedbackViewModel {
+        return FeedbackViewModel(contact: self.email)
+    }
 }
 
 public class LicenseViewModel: ObservableObject {

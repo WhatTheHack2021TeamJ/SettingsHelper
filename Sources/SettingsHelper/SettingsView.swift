@@ -1,38 +1,26 @@
 import SwiftUI
-import MessageUI
 
 public struct SettingsView: View {
-    let licenses: [License]
-    public init(bundle: Bundle) {
-        if let urls = bundle.urls(forResourcesWithExtension: "license", subdirectory: "licenses") {
-            licenses = urls.compactMap { url -> License? in
-                guard let content = try? String(contentsOf: url)
-                else { return nil }
-                return License(title: url.deletingPathExtension().lastPathComponent, fullText: content)
-            }.sorted(by: { $0.title.lowercased() < $1.title.lowercased() })
-        } else {
-            licenses = []
-        }
-        
+    private let settings: SettingsConfiguration
+
+    public init(settings: SettingsConfiguration) {
+        self.settings = settings
     }
-    
+
     public var body: some View {
         NavigationView {
             Form {
                 Section(header: Label("Contact", systemImage: "envelope.fill")) {
+                    FeedbackRow(feedbackViewModel: self.settings.createFeedbackViewModel())
                     Label("Something", systemImage: "circle")
                     Label("Something", systemImage: "circle")
                     Label("Something", systemImage: "circle")
                 }
                 
-                Section(header: Label("Legal", systemImage: "books.vertical")) {
-                    LicensesRow(licenses: licenses)
-                    Label("Something", systemImage: "circle")
-                    Label("Something", systemImage: "circle")
-                }
-                
-                Section(header: Label("Feedback", systemImage: "paperplane")) {
-                    FeedbackRow()
+                Section(header: Label("Legal", systemImage: "books.vertical.fill")) {
+                    if self.settings.shouldShowLicense {
+                        LicensesRow(licenses: self.settings.createLicenseViewModel().getLicenses() ?? [])
+                    }
                     Label("Something", systemImage: "circle")
                     Label("Something", systemImage: "circle")
                 }
@@ -42,137 +30,9 @@ public struct SettingsView: View {
     }
 }
 
-func loadLicenses(_ bundle: Bundle) -> [License] {
-    []
-}
-
-struct LicensesRow: View {
-    var licenses: [License]
-    var title: LocalizedStringKey = "Licenses"
-    var body: some View {
-        NavigationLink(
-            destination: LicensesPage(licenses: licenses)
-                .navigationTitle(title),
-            label: {
-                Label(title, systemImage: "doc")
-            })
-    }
-}
-
-struct LicensesPage: View {
-    var licenses: [License]
-    var body: some View {
-        List {
-            ForEach(licenses) { license in
-                LicenseDetails(license: license)
-            }
-        }.listStyle(InsetGroupedListStyle())
-    }
-}
-
-struct License: Identifiable {
-    var title: String
-    var fullText: String
-    
-    var id: String { title }
-}
-
-struct LicenseDetails: View {
-    @State private var isExpanded: Bool = false
-    
-    
-    var license: License
-    
-    var body: some View {
-        NavigationLink(
-            destination: ScrollView { Text(license.fullText).padding() }
-                .navigationTitle(license.title),
-            label: {
-                Label(license.title, systemImage: "doc")
-            })
-    }
-}
-
-struct FeedbackRow: View {
-    
-    var title: LocalizedStringKey = "Feedback"
-    
-    var body: some View {
-        NavigationLink(
-            destination: FeedbackView()
-                .navigationTitle(title),
-            label: {
-                Label(title, systemImage: "circle")
-            })
-    }
-}
-
-enum Feedback: Identifiable {
-    case feedback
-    case reportProblem
-    
-    var contact: String { "dummyEmail@email.com" }
-    
-    var messageContent: (subject: String, message: String, recipient: String) {
-        switch self {
-        case .feedback:
-            return ("Submit Feedback", "", self.contact)
-        case .reportProblem:
-            return ("Report a problem", "", self.contact)
-        }
-    }
-    
-    var id: Int {
-        switch self {
-        case .feedback: return 0
-        case .reportProblem: return 1
-        }
-    }
-}
-
-struct FeedbackView: View {
-    
-    @State private var selectedOption: Feedback?
-    
-    // Not sure why this needs to be included
-    @State var result: Result<MFMailComposeResult, Error>? = nil
-    
-    var body: some View {
-        Form {
-            
-            Section {
-                Button(action: {
-                    selectedOption = .feedback
-                }) {
-                    Label("Submit Feedback", systemImage: "envelope")
-                }
-                .disabled(!MFMailComposeViewController.canSendMail())
-                
-            }
-            
-            Section {
-                Button(action: {
-                    selectedOption = .reportProblem
-                }) {
-                    Label("Report a problem", systemImage: "envelope")
-                }
-                .disabled(!MFMailComposeViewController.canSendMail())
-            }
-            
-            Section(footer: Text("Select one of the options above.\n\nYour email will be sent to") + Text(" \(Feedback.feedback.contact)").fontWeight(.bold), content: {
-                EmptyView()
-            })
-        }.sheet(item: $selectedOption) { content in
-            MailView(result: self.$result, content: content).ignoresSafeArea(edges: .all)
-        }
-    }
-    
-}
-
-
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(bundle: .main)
+        SettingsView(settings: SettingsConfiguration(email: "settings@whatthehack.com"))
     }
 }
 
