@@ -85,7 +85,7 @@ This framework can automatically copy the LICENSE files to your app when buildin
 
 To do this, add a *New Run Script Phase* in your *Build Phases* and use the following command: `${BUILD_DIR}/../../SourcePackages/checkouts/SettingsHelper/Sources/SettingsHelperGenerator/main.swift`
 
-<img src="assets/SettingsHelper Copy Licenses Run Script.png" width="400" height="200">
+<img src="assets/SettingsHelper Copy Licenses Run Script.png" width="400">
 
 
 
