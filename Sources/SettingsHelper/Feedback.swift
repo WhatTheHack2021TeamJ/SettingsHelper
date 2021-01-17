@@ -73,7 +73,7 @@ enum Feedback: Identifiable {
 
 struct FeedbackView: View {
 
-    @State var viewModel: FeedbackViewModel
+    @ObservedObject var viewModel: FeedbackViewModel
 
     // Not sure why this needs to be included
     @State var result: Result<MFMailComposeResult, Error>? = nil

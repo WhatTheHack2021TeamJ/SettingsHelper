@@ -37,6 +37,12 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
                 Section(header: Label("Contact", systemImage: "envelope.fill")) {
                     FeedbackRow(feedbackViewModel: self.settings.createFeedbackViewModel())
                 }
+                
+                if let questionsAndAnswersViewModel = self.settings.createQuestionAndAnswerViewModel() {
+                    Section(header: Label("FAQ", systemImage: "questionmark.circle.fill")) {
+                        AllQuestionAndAnswersRowView(viewModel: questionsAndAnswersViewModel)
+                    }
+                }
 
                 Section(header: Label("Legal", systemImage: "books.vertical.fill")) {
                     if self.settings.shouldShowLicense {
@@ -68,8 +74,11 @@ struct SettingsView_Previews: PreviewProvider {
         SettingsView(
             settings: SettingsConfiguration(
                 email: "settings@whatthehack.com",
-                creditsUsage: .useCredits(CreditsContent(content: "Test")),
-                dataPrivacyUsage: .useDataPrivacy(CreditsContent(content: "Data Privacy"))))
+                creditsUsage: .useCredits(StaticTextContent(content: "Test")),
+                dataPrivacyUsage: .useDataPrivacy(StaticTextContent(content: "Data Privacy")),
+                questionsAndAnswers: [
+                    QuestionAndAnswer(title: "What is this?", content: "This is a test.")
+                ]))
             .environment(\.colorScheme, .dark)
     }
 }

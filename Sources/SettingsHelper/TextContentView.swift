@@ -86,7 +86,7 @@ public struct SettingsFile: SettingsContent {
     }
 }
 
-public struct CreditsContent: SettingsContent {
+public struct StaticTextContent: SettingsContent {
     private let _content: String
     public var content: String? {
         return self._content
