@@ -64,9 +64,46 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
                 }
             }
             .navigationTitle("Settings")
-        }
-    }
 
+            DetailNothingSelectedView()
+        }
+        .navigationViewStyle(DoubleColumnNavigationViewStyle())
+    }
+}
+
+struct DetailNothingSelectedView: View {
+    @State private var isAnimating = false
+
+    private let rotationAnimation = Animation.linear(duration: 30.0)
+        .repeatForever(autoreverses: false)
+
+    var body: some View {
+        ZStack {
+            Color(UIColor.systemGroupedBackground)
+
+            VStack(spacing: 32) {
+                Spacer()
+                Image(systemName: "gearshape.fill")
+                    .font(.system(size: 100))
+                    .foregroundColor(Color(UIColor.tertiaryLabel))
+                    .rotationEffect(Angle(degrees: self.isAnimating ? 360.0 : 0.0))
+                    .animation(self.rotationAnimation)
+                    .onAppear {
+                        self.isAnimating = true
+                    }
+
+                Text("Settings")
+                    .bold()
+                    .font(.largeTitle)
+                Text("You can select an option in the Settings view.")
+                    .foregroundColor(Color(UIColor.tertiaryLabel))
+                Spacer()
+            }
+        }
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
+    }
 }
 
 struct SettingsView_Previews: PreviewProvider {
