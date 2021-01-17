@@ -27,6 +27,9 @@ public struct SettingsView: View {
                     if let creditsViewModel = self.settings.createCreditsViewModel() {
                         CreditsRow(creditsViewModel: creditsViewModel)
                     }
+                    if let dataPrivacyViewModel = self.settings.createDataPrivacyViewModel() {
+                        DataPrivacyRow(creditsViewModel: dataPrivacyViewModel)
+                    }
                     Label("Something", systemImage: "circle")
                     Label("Something", systemImage: "circle")
                 }
@@ -41,6 +44,9 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(
             settings: SettingsConfiguration(
-                email: "settings@whatthehack.com", creditsUsage: .useCredits(CreditsContent(content: "Test"))))
+                email: "settings@whatthehack.com",
+                creditsUsage: .useCredits(CreditsContent(content: "Test")),
+                dataPrivacyUsage: .useDataPrivacy(CreditsContent(content: "Data Privacy"))))
+            .environment(\.colorScheme, .dark)
     }
 }
