@@ -87,7 +87,7 @@ struct DetailNothingSelectedView: View {
                     .font(.system(size: 100))
                     .foregroundColor(Color(UIColor.tertiaryLabel))
                     .rotationEffect(Angle(degrees: self.isAnimating ? 360.0 : 0.0))
-                    .animation(self.rotationAnimation)
+                    .animation(rotationAnimation, value: isAnimating)
                     .onAppear {
                         self.isAnimating = true
                     }
