@@ -9,11 +9,23 @@ Our team came together and built a framework to help support future SwiftUI deve
 
 ## Installation
 
-First you'll want to add the Swift Package Manager source to your project. You can do this with this link:
+### Swift Package Manager
 
-`https://github.com/WhatTheHack2021TeamJ/SettingsHelper.git`
+You can install SettingsHelper using [Swift Package Manager](https://swift.org/package-manager/) which is integrated into the `swift` compiler.
 
-Once you have added the package you can continue to the usage of the package.
+Once you have your Swift package set up, adding SettingsHelper as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/WhatTheHack2021TeamJ/SettingsHelper.git", .branch:("main"))
+]
+```
+
+You can also add SettingsHelper by navigating in Xcode to *File > Swift Packages > Add Package Dependency...*.
+* Enter this project's URL: https://github.com/WhatTheHack2021TeamJ/SettingsHelper.git
+
+
+> **Note**: SettingsHelper will only currently only work with Swift Packages. it relies on the folder structure of the Swift Packages to make sure that the files are where they should be.
 
 ## Usage
 
