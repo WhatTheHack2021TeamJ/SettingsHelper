@@ -8,10 +8,23 @@ let buildDirURL = URL(fileURLWithPath: buildDir)
 guard let builtProductsDir = env["BUILT_PRODUCTS_DIR"]
 else { fatalError("Requires BUILT_PRODUCTS_DIR environment variable") }
 let builtProductsURL = URL(fileURLWithPath: builtProductsDir)
-guard let resourcesComponent = env["UNLOCALIZED_RESOURCES_FOLDER_PATH"]
-else { fatalError("Requires UNLOCALIZED_RESOURCES_FOLDER_PATH environment variable") }
+guard let resourcesComponent = env["WRAPPER_NAME"]
+else { fatalError("Requires WRAPPER_NAME environment variable") }
 
-let projectDir = buildDirURL.deletingLastPathComponent().deletingLastPathComponent().appendingPathComponent("SourcePackages").appendingPathComponent("checkouts")
+var builtDirRootURL = builtProductsURL
+while builtDirRootURL.path != "" {
+    if builtDirRootURL.lastPathComponent == "Build" {
+        builtDirRootURL.deleteLastPathComponent()
+        break
+    } else {
+        builtDirRootURL.deleteLastPathComponent()
+    }
+}
+guard builtDirRootURL.path != "" else {
+    fatalError("Could not find Build Prodcut Root Directory")
+}
+
+let projectDir = builtDirRootURL.appendingPathComponent("SourcePackages").appendingPathComponent("checkouts")
 let buildOutputDir = builtProductsURL.appendingPathComponent(resourcesComponent).appendingPathComponent("licenses")
 
 
