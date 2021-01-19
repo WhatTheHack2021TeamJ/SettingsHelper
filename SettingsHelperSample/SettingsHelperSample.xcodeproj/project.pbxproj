@@ -176,7 +176,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./CopyLicenses.swift\n# ${BUILD_DIR}/../../SourcePackages/checkouts/SettingsHelper/Sources/SettingsHelperGenerator/main.swift\n";
+			shellScript = "./CopyLicenses.swift\n# ${BUILD_DIR/\\/Build\\/*//}SourcePackages/checkouts/SettingsHelper/Sources/SettingsHelperGenerator/main.swift\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

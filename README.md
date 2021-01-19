@@ -83,7 +83,7 @@ The QuestionAndAnswers will contain `title` and `content` parameters. Excluding 
 
 This framework can automatically copy the LICENSE files to your app when building. It iterates over every SPM project that your projects uses and look for LICENSE fies. They are added to your *.app bundle resources.
 
-To do this, add a *New Run Script Phase* in your *Build Phases* and use the following command: `${BUILD_DIR}/../../SourcePackages/checkouts/SettingsHelper/Sources/SettingsHelperGenerator/main.swift`
+To do this, add a *New Run Script Phase* in your *Build Phases* and use the following command: `${BUILD_DIR/\/Build\/*//}SourcePackages/checkouts/SettingsHelper/Sources/SettingsHelperGenerator/main.swift`
 
 <img src="assets/SettingsHelper Copy Licenses Run Script.png" width="600">
 
