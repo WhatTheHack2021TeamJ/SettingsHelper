@@ -7,17 +7,21 @@
 
 import SwiftUI
 
-
 struct LicensesRow: View {
     var licenses: [License]
+    var color: Color?
+    
     var title: LocalizedStringKey = "Licenses"
+
     var body: some View {
-        NavigationLink(
-            destination: LicensesPage(licenses: licenses)
-                .navigationTitle(title),
-            label: {
-                Label(title, systemImage: "doc")
-            })
+        SettingsRow(
+            title: title,
+            systemImage: "doc",
+            color: self.color,
+            destination: {
+                LicensesPage(licenses: licenses)
+            }
+        )
     }
 }
 

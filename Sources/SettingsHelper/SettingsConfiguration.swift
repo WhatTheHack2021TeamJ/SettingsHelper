@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 public enum LicenseOption {
     case useGeneratedLicenses, none
@@ -19,6 +20,53 @@ public enum DataPrivacyOption {
     case useDataPrivacy(SettingsContent), none
 }
 
+public enum SettingsSytleOption {
+    case normal, colorfulIcon(SettingsIconColors)
+
+    var settingsIconColors: SettingsIconColors {
+        switch self {
+        case .normal:
+            return DefaultSettingsIconColor()
+        case .colorfulIcon(let settingsIconColors):
+            return settingsIconColors
+        }
+    }
+}
+
+public protocol SettingsIconColors {
+    var feedbackColor: Color? { get }
+    var faqColor: Color? { get }
+    var licenseColor: Color? { get }
+    var dataPrivacyColor: Color? { get }
+    var creditsColor: Color? { get }
+}
+
+public struct SettingsColorfulIconColors: SettingsIconColors {
+    public let creditsColor: Color?
+    public let dataPrivacyColor: Color?
+    public let faqColor: Color?
+    public let feedbackColor: Color?
+    public let licenseColor: Color?
+
+    public init(creditsColor: Color, dataPrivacyColor: Color, faqColor: Color, feedbackColor: Color, licenseColor: Color) {
+        self.creditsColor = creditsColor
+        self.dataPrivacyColor = dataPrivacyColor
+        self.faqColor = faqColor
+        self.feedbackColor = feedbackColor
+        self.licenseColor = licenseColor
+    }
+
+    public static let basic: SettingsColorfulIconColors = SettingsColorfulIconColors(creditsColor: .red, dataPrivacyColor: .green, faqColor: .gray, feedbackColor: .blue, licenseColor: .purple)
+}
+
+public struct DefaultSettingsIconColor: SettingsIconColors {
+    public var creditsColor: Color? = nil
+    public var dataPrivacyColor: Color? = nil
+    public var faqColor: Color? = nil
+    public var feedbackColor: Color? = nil
+    public var licenseColor: Color? = nil
+}
+
 public class SettingsConfiguration {
     public var bundle: Bundle
     public var licenseUsage: LicenseOption
@@ -26,14 +74,20 @@ public class SettingsConfiguration {
     public var creditsUsage: CreditsOption
     public var dataPrivacyUsage: DataPrivacyOption
     public var questionsAndAnswers: [QuestionAndAnswer]
+    public var settingsSytleOption: SettingsSytleOption
 
-    public init(email: String, licenseUsage: LicenseOption = .useGeneratedLicenses, bundle: Bundle = .main, creditsUsage: CreditsOption = .none, dataPrivacyUsage: DataPrivacyOption = .none, questionsAndAnswers: [QuestionAndAnswer] = []) {
+    public init(email: String, licenseUsage: LicenseOption = .useGeneratedLicenses, bundle: Bundle = .main, creditsUsage: CreditsOption = .none, dataPrivacyUsage: DataPrivacyOption = .none, questionsAndAnswers: [QuestionAndAnswer] = [], settingsSytleOption: SettingsSytleOption = .normal) {
         self.email = email
         self.licenseUsage = licenseUsage
         self.bundle = bundle
         self.creditsUsage = creditsUsage
         self.dataPrivacyUsage = dataPrivacyUsage
         self.questionsAndAnswers = questionsAndAnswers
+        self.settingsSytleOption = settingsSytleOption
+    }
+
+    var settingsIconColors: SettingsIconColors {
+        return self.settingsSytleOption.settingsIconColors
     }
 
     var shouldShowLicense: Bool {

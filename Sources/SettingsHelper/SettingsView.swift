@@ -35,25 +35,27 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
             Form {
                 topFormContent()
                 Section(header: Label("Contact", systemImage: "envelope.fill")) {
-                    FeedbackRow(feedbackViewModel: self.settings.createFeedbackViewModel())
+                    FeedbackRow(feedbackViewModel: self.settings.createFeedbackViewModel(), color: self.settings.settingsIconColors.feedbackColor)
                 }
-                
+
                 if let questionsAndAnswersViewModel = self.settings.createQuestionAndAnswerViewModel() {
                     Section(header: Label("FAQ", systemImage: "questionmark.circle.fill")) {
-                        AllQuestionAndAnswersRowView(viewModel: questionsAndAnswersViewModel)
+                        AllQuestionAndAnswersRowView(viewModel: questionsAndAnswersViewModel, color: self.settings.settingsIconColors.faqColor)
                     }
                 }
 
                 Section(header: Label("Legal", systemImage: "books.vertical.fill")) {
                     if self.settings.shouldShowLicense {
                         LicensesRow(
-                            licenses: self.settings.createLicenseViewModel().getLicenses() ?? [])
+                            licenses: self.settings.createLicenseViewModel().getLicenses() ?? [],
+                            color: self.settings.settingsIconColors.licenseColor
+                        )
                     }
                     if let creditsViewModel = self.settings.createCreditsViewModel() {
-                        CreditsRow(creditsViewModel: creditsViewModel)
+                        CreditsRow(creditsViewModel: creditsViewModel, color: self.settings.settingsIconColors.creditsColor)
                     }
                     if let dataPrivacyViewModel = self.settings.createDataPrivacyViewModel() {
-                        DataPrivacyRow(creditsViewModel: dataPrivacyViewModel)
+                        DataPrivacyRow(dataPrivacyViewModel: dataPrivacyViewModel, color: self.settings.settingsIconColors.dataPrivacyColor)
                     }
                 }
                 
