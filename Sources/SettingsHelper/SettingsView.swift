@@ -57,6 +57,9 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
                     if let dataPrivacyViewModel = self.settings.createDataPrivacyViewModel() {
                         DataPrivacyRow(dataPrivacyViewModel: dataPrivacyViewModel, color: self.settings.settingsIconColors.dataPrivacyColor)
                     }
+                    if let impressumViewModel = self.settings.createImpressumViewModel() {
+                        ImpressumRow(impressumViewModel: impressumViewModel, color: self.settings.settingsIconColors.impressumColor)
+                    }
                 }
                 
                 bottomFormContent()
@@ -110,14 +113,42 @@ struct DetailNothingSelectedView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(
-            settings: SettingsConfiguration(
-                email: "settings@whatthehack.com",
-                creditsUsage: .useCredits(StaticTextContent(content: "Test")),
-                dataPrivacyUsage: .useDataPrivacy(StaticTextContent(content: "Data Privacy")),
-                questionsAndAnswers: [
-                    QuestionAndAnswer(title: "What is this?", content: "This is a test.")
-                ]))
-            .environment(\.colorScheme, .dark)
+        Group {
+            SettingsView(
+                settings: SettingsConfiguration(
+                    email: "settings@whatthehack.com",
+                    creditsUsage: .useCredits(StaticTextContent(content: "Test")),
+                    dataPrivacyUsage: .useDataPrivacy(StaticTextContent(content: "Data Privacy")),
+                    questionsAndAnswers: [
+                        QuestionAndAnswer(title: "What is this?", content: "This is a test.")
+                    ],
+                    impressumOption: .useImpressum(SettingsImpressumContact(
+                                                    fullName: "First Last", streetAndHouseNumber: "Street 123",
+                                                    postalCodeAndCity: "12345 City", phoneNumber: "+12 239293293",
+                                                    email: "settings@test.com"))))
+                .environment(\.colorScheme, .dark)
+            SettingsView(
+                settings: SettingsConfiguration(
+                    email: "settings@whatthehack.com",
+                    creditsUsage: .useCredits(StaticTextContent(content: "Test")),
+                    dataPrivacyUsage: .useDataPrivacy(StaticTextContent(content: "Data Privacy")),
+                    questionsAndAnswers: [
+                        QuestionAndAnswer(title: "What is this?", content: "This is a test.")
+                    ],
+                    impressumOption: .useImpressum(
+                        SettingsImpressumContact(
+                            fullName: "First Last",
+                            streetAndHouseNumber: "Street 123",
+                            postalCodeAndCity: "12345 City",
+                            phoneNumber: "+12 239293293",
+                            email: "settings@test.com"
+                        )
+                    ),
+                    settingsSytleOption: .colorfulIcon(SettingsColorfulIconColors.basic)
+                )
+            )
+                .previewDevice("iPhone 12 Pro")
+                .environment(\.colorScheme, .dark)
+        }
     }
 }

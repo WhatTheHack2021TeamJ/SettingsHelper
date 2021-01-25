@@ -33,12 +33,17 @@ public enum SettingsSytleOption {
     }
 }
 
+public enum ImpressumOption {
+    case useImpressum(SettingsImpressumContact), none
+}
+
 public protocol SettingsIconColors {
     var feedbackColor: Color? { get }
     var faqColor: Color? { get }
     var licenseColor: Color? { get }
     var dataPrivacyColor: Color? { get }
     var creditsColor: Color? { get }
+    var impressumColor: Color? { get }
 }
 
 public struct SettingsColorfulIconColors: SettingsIconColors {
@@ -47,16 +52,18 @@ public struct SettingsColorfulIconColors: SettingsIconColors {
     public let faqColor: Color?
     public let feedbackColor: Color?
     public let licenseColor: Color?
+    public let impressumColor: Color?
 
-    public init(creditsColor: Color, dataPrivacyColor: Color, faqColor: Color, feedbackColor: Color, licenseColor: Color) {
+    public init(creditsColor: Color, dataPrivacyColor: Color, faqColor: Color, feedbackColor: Color, licenseColor: Color, impressumColor: Color) {
         self.creditsColor = creditsColor
         self.dataPrivacyColor = dataPrivacyColor
         self.faqColor = faqColor
         self.feedbackColor = feedbackColor
         self.licenseColor = licenseColor
+        self.impressumColor = impressumColor
     }
 
-    public static let basic: SettingsColorfulIconColors = SettingsColorfulIconColors(creditsColor: .red, dataPrivacyColor: .green, faqColor: .gray, feedbackColor: .blue, licenseColor: .purple)
+    public static let basic: SettingsColorfulIconColors = SettingsColorfulIconColors(creditsColor: .red, dataPrivacyColor: .green, faqColor: .gray, feedbackColor: .blue, licenseColor: .purple, impressumColor: .orange)
 }
 
 public struct DefaultSettingsIconColor: SettingsIconColors {
@@ -65,6 +72,7 @@ public struct DefaultSettingsIconColor: SettingsIconColors {
     public var faqColor: Color? = nil
     public var feedbackColor: Color? = nil
     public var licenseColor: Color? = nil
+    public var impressumColor: Color? = nil
 }
 
 public class SettingsConfiguration {
@@ -75,8 +83,9 @@ public class SettingsConfiguration {
     public var dataPrivacyUsage: DataPrivacyOption
     public var questionsAndAnswers: [QuestionAndAnswer]
     public var settingsSytleOption: SettingsSytleOption
+    public var impressumOption: ImpressumOption
 
-    public init(email: String, licenseUsage: LicenseOption = .useGeneratedLicenses, bundle: Bundle = .main, creditsUsage: CreditsOption = .none, dataPrivacyUsage: DataPrivacyOption = .none, questionsAndAnswers: [QuestionAndAnswer] = [], settingsSytleOption: SettingsSytleOption = .normal) {
+    public init(email: String, licenseUsage: LicenseOption = .useGeneratedLicenses, bundle: Bundle = .main, creditsUsage: CreditsOption = .none, dataPrivacyUsage: DataPrivacyOption = .none, questionsAndAnswers: [QuestionAndAnswer] = [], impressumOption: ImpressumOption = .none, settingsSytleOption: SettingsSytleOption = .normal) {
         self.email = email
         self.licenseUsage = licenseUsage
         self.bundle = bundle
@@ -84,6 +93,7 @@ public class SettingsConfiguration {
         self.dataPrivacyUsage = dataPrivacyUsage
         self.questionsAndAnswers = questionsAndAnswers
         self.settingsSytleOption = settingsSytleOption
+        self.impressumOption = impressumOption
     }
 
     var settingsIconColors: SettingsIconColors {
@@ -128,6 +138,15 @@ public class SettingsConfiguration {
     func createQuestionAndAnswerViewModel() -> QuestionAndAnswerViewModel? {
         guard self.questionsAndAnswers.count > 0 else { return nil }
         return QuestionAndAnswerViewModel(questionAndAnswers: self.questionsAndAnswers)
+    }
+
+    func createImpressumViewModel() -> ImpressumViewModel? {
+        switch self.impressumOption {
+        case .useImpressum(let contact):
+            return ImpressumViewModel(contact: contact)
+        case .none:
+            return nil
+        }
     }
 }
 
