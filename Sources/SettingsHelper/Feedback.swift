@@ -10,16 +10,12 @@ import MessageUI
 
 struct FeedbackRow: View {
     @ObservedObject var feedbackViewModel: FeedbackViewModel
+    var color: Color?
 
     var title: LocalizedStringKey = "Feedback"
 
     var body: some View {
-        NavigationLink(
-            destination: FeedbackView(viewModel: self.feedbackViewModel)
-                .navigationTitle(title),
-            label: {
-                Label(title, systemImage: "envelope")
-            })
+        SettingsRow(title: self.title, systemImage: "envelope", color: self.color, destination: { FeedbackView(viewModel: self.feedbackViewModel) })
     }
 }
 

@@ -9,16 +9,12 @@ import SwiftUI
 
 struct AllQuestionAndAnswersRowView: View {
     @ObservedObject var viewModel: QuestionAndAnswerViewModel
+    var color: Color?
 
     var title: LocalizedStringKey = "FAQ"
 
     var body: some View {
-        NavigationLink(
-            destination: AllQuestionAndAnswersView(viewModel: self.viewModel)
-                .navigationTitle(title),
-            label: {
-                Label(title, systemImage: "questionmark")
-            })
+        SettingsRow(title: self.title, systemImage: "questionmark", color: self.color, destination: { AllQuestionAndAnswersView(viewModel: self.viewModel) })
     }
 }
 
