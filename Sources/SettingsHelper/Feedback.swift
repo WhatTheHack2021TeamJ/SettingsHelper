@@ -12,7 +12,7 @@ struct FeedbackRow: View {
     @ObservedObject var feedbackViewModel: FeedbackViewModel
     var color: Color?
 
-    var title: LocalizedStringKey = "Feedback"
+    var title: String = NSLocalizedString("Feedback", bundle: .module, comment: "")
 
     var body: some View {
         SettingsRow(title: self.title, systemImage: "envelope", color: self.color, destination: { FeedbackView(viewModel: self.feedbackViewModel) })
@@ -53,9 +53,9 @@ enum Feedback: Identifiable {
     func messageContent(contact: String) -> (subject: String, message: String, recipient: String) {
         switch self {
         case .feedback:
-            return ("Submit Feedback", "", contact)
+            return (NSLocalizedString("Submit Feedback", bundle: .module, comment: ""), "", contact)
         case .reportProblem:
-            return ("Report a problem", "", contact)
+            return (NSLocalizedString("Report a problem", bundle: .module, comment: ""), "", contact)
         }
     }
 
@@ -81,7 +81,7 @@ struct FeedbackView: View {
                 Button(action: {
                     self.viewModel.selectedOption = .feedback
                 }) {
-                    Label("Submit Feedback", systemImage: "star")
+                    Label(NSLocalizedString("Submit Feedback", bundle: .module, comment: ""), systemImage: "star")
                 }
                 .disabled(!MFMailComposeViewController.canSendMail())
 
@@ -91,12 +91,12 @@ struct FeedbackView: View {
                 Button(action: {
                     self.viewModel.selectedOption = .reportProblem
                 }) {
-                    Label("Report a problem", systemImage: "ant")
+                    Label(NSLocalizedString("Report a problem", bundle: .module, comment: ""), systemImage: "ant")
                 }
                 .disabled(!MFMailComposeViewController.canSendMail())
             }
 
-            Section(footer: Text("Select one of the options above.\n\nYour email will be sent to") + Text(" \(self.viewModel.contact)").fontWeight(.bold), content: {
+            Section(footer: Text("SelectOptionSendMailText") + Text(self.viewModel.contact).fontWeight(.bold), content: {
                 EmptyView()
             })
         }.sheet(item: self.$viewModel.selectedOption) { feedback in

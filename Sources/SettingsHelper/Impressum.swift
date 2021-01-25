@@ -11,7 +11,7 @@ struct ImpressumRow: View {
     @ObservedObject var impressumViewModel: ImpressumViewModel
     var color: Color?
 
-    var title: LocalizedStringKey = "Impressum"
+    var title: String = NSLocalizedString("Impressum", bundle: .module, comment: "")
 
     var body: some View {
         SettingsRow(

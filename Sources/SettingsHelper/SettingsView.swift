@@ -34,17 +34,17 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
         NavigationView {
             Form {
                 topFormContent()
-                Section(header: Label("Contact", systemImage: "envelope.fill")) {
+                Section(header: Label(NSLocalizedString("Contact", bundle: .module, comment: ""), systemImage: "envelope.fill")) {
                     FeedbackRow(feedbackViewModel: self.settings.createFeedbackViewModel(), color: self.settings.settingsIconColors.feedbackColor)
                 }
 
                 if let questionsAndAnswersViewModel = self.settings.createQuestionAndAnswerViewModel() {
-                    Section(header: Label("FAQ", systemImage: "questionmark.circle.fill")) {
+                    Section(header: Label(NSLocalizedString("FAQ", bundle: .module, comment: ""), systemImage: "questionmark.circle.fill")) {
                         AllQuestionAndAnswersRowView(viewModel: questionsAndAnswersViewModel, color: self.settings.settingsIconColors.faqColor)
                     }
                 }
 
-                Section(header: Label("Legal", systemImage: "books.vertical.fill")) {
+                Section(header: Label(NSLocalizedString("Legal", bundle: .module, comment: ""), systemImage: "books.vertical.fill")) {
                     if self.settings.shouldShowLicense {
                         LicensesRow(
                             licenses: self.settings.createLicenseViewModel().getLicenses() ?? [],
@@ -68,7 +68,7 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
                     EmptyView()
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle(NSLocalizedString("Settings", bundle: .module, comment: ""))
 
             DetailNothingSelectedView()
         }

@@ -11,7 +11,7 @@ public struct DataPrivacyRow<ViewModel: TextContentViewModel>: View {
     @ObservedObject var dataPrivacyViewModel: ViewModel
     var color: Color?
 
-    var title: LocalizedStringKey = "Data Privacy"
+    var title: String = NSLocalizedString("Data Privacy", bundle: .module, comment: "")
 
     public var body: some View {
         SettingsRow(title: self.title, systemImage: "checkmark.shield", color: self.color, destination: { TextContentView(viewModel: self.dataPrivacyViewModel) })
@@ -22,7 +22,7 @@ public struct CreditsRow<ViewModel: TextContentViewModel>: View {
     @ObservedObject var creditsViewModel: ViewModel
     var color: Color?
 
-    var title: LocalizedStringKey = "Credits"
+    var title: String = NSLocalizedString("Credits", bundle: .module, comment: "")
 
     public var body: some View {
         SettingsRow(title: self.title, systemImage: "heart", color: self.color, destination: { TextContentView(viewModel: self.creditsViewModel) })
