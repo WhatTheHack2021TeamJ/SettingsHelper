@@ -11,8 +11,8 @@
 		5C68DF7C25B3A12A006FF5DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C68DF7B25B3A12A006FF5DF /* ContentView.swift */; };
 		5C68DF7E25B3A130006FF5DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C68DF7D25B3A130006FF5DF /* Assets.xcassets */; };
 		5C68DF8125B3A130006FF5DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C68DF8025B3A130006FF5DF /* Preview Assets.xcassets */; };
-		5CA25D0125B3E3A8003AC737 /* SettingsHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 5CA25D0025B3E3A8003AC737 /* SettingsHelper */; };
 		BA6B671B25B4B83C007C7174 /* ConfettiView in Frameworks */ = {isa = PBXBuildFile; productRef = BA6B671A25B4B83C007C7174 /* ConfettiView */; };
+		BA8F67F425BF9C80008A03C3 /* SettingsHelper in Frameworks */ = {isa = PBXBuildFile; productRef = BA8F67F325BF9C80008A03C3 /* SettingsHelper */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +30,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CA25D0125B3E3A8003AC737 /* SettingsHelper in Frameworks */,
 				BA6B671B25B4B83C007C7174 /* ConfettiView in Frameworks */,
+				BA8F67F425BF9C80008A03C3 /* SettingsHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,8 +101,8 @@
 			);
 			name = SettingsHelperSample;
 			packageProductDependencies = (
-				5CA25D0025B3E3A8003AC737 /* SettingsHelper */,
 				BA6B671A25B4B83C007C7174 /* ConfettiView */,
+				BA8F67F325BF9C80008A03C3 /* SettingsHelper */,
 			);
 			productName = SettingsHelperSample;
 			productReference = 5C68DF7625B3A12A006FF5DF /* SettingsHelperSample.app */;
@@ -416,14 +416,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5CA25D0025B3E3A8003AC737 /* SettingsHelper */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SettingsHelper;
-		};
 		BA6B671A25B4B83C007C7174 /* ConfettiView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BA6B671925B4B83C007C7174 /* XCRemoteSwiftPackageReference "ConfettiView" */;
 			productName = ConfettiView;
+		};
+		BA8F67F325BF9C80008A03C3 /* SettingsHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SettingsHelper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
