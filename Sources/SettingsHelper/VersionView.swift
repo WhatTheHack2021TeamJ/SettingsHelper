@@ -16,6 +16,6 @@ struct VersionFooterView: View {
     let version: VersionFooterModel
     
     var body: some View {
-        Text("Version \(version.versionNumber) (\(version.buildNumber))").frame(maxWidth: .infinity)
+        Text("Version \(version.versionNumber) (\(version.buildNumber))", bundle: .module).frame(maxWidth: .infinity)
     }
 }

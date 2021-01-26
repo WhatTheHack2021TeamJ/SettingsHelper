@@ -97,10 +97,10 @@ struct DetailNothingSelectedView: View {
                         self.isAnimating = true
                     }
 
-                Text("Settings")
+                Text("Settings", bundle: .module)
                     .bold()
                     .font(.largeTitle)
-                Text("You can select an option in the Settings view.")
+                Text("You can select an option in the Settings view.", bundle: .module)
                     .foregroundColor(Color(UIColor.tertiaryLabel))
                 Spacer()
             }
@@ -127,6 +127,7 @@ struct SettingsView_Previews: PreviewProvider {
                                                     postalCodeAndCity: "12345 City", phoneNumber: "+12 239293293",
                                                     email: "settings@test.com"))))
                 .environment(\.colorScheme, .dark)
+
             SettingsView(
                 settings: SettingsConfiguration(
                     email: "settings@whatthehack.com",
@@ -149,6 +150,7 @@ struct SettingsView_Previews: PreviewProvider {
             )
                 .previewDevice("iPhone 12 Pro")
                 .environment(\.colorScheme, .dark)
+                .environment(\.locale, Locale.init(identifier: "de"))
         }
     }
 }

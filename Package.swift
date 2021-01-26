@@ -21,7 +21,7 @@ let package = Package(
         .target(
             name: "SettingsHelper",
             dependencies: [],
-            resources: [.copy("Resources")]
+            resources: [.process("Resources")]
         ),
         .target(
             name: "SettingsHelperGenerator",

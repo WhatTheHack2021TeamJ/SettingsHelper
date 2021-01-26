@@ -96,7 +96,7 @@ struct FeedbackView: View {
                 .disabled(!MFMailComposeViewController.canSendMail())
             }
 
-            Section(footer: Text("SelectOptionSendMailText") + Text(self.viewModel.contact).fontWeight(.bold), content: {
+            Section(footer: Text("SelectOptionSendMailText", bundle: .module) + Text(self.viewModel.contact).fontWeight(.bold), content: {
                 EmptyView()
             })
         }.sheet(item: self.$viewModel.selectedOption) { feedback in
