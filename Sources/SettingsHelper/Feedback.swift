@@ -81,7 +81,7 @@ struct FeedbackView: View {
                 Button(action: {
                     self.viewModel.selectedOption = .feedback
                 }) {
-                    Label(NSLocalizedString("Submit Feedback", bundle: .module, comment: ""), systemImage: "star")
+                    CompatibleLabel(NSLocalizedString("Submit Feedback", bundle: .module, comment: ""), systemImage: "star")
                 }
                 .disabled(!MFMailComposeViewController.canSendMail())
 
@@ -91,7 +91,7 @@ struct FeedbackView: View {
                 Button(action: {
                     self.viewModel.selectedOption = .reportProblem
                 }) {
-                    Label(NSLocalizedString("Report a problem", bundle: .module, comment: ""), systemImage: "ant")
+                    CompatibleLabel(NSLocalizedString("Report a problem", bundle: .module, comment: ""), systemImage: "ant")
                 }
                 .disabled(!MFMailComposeViewController.canSendMail())
             }
@@ -100,7 +100,9 @@ struct FeedbackView: View {
                 EmptyView()
             })
         }.sheet(item: self.$viewModel.selectedOption) { feedback in
-            MailView(result: self.$result, viewModel: self.viewModel.createMailViewModel(feedback: feedback)).ignoresSafeArea(edges: .all)
+            MailView(result: self.$result, viewModel: self.viewModel.createMailViewModel(feedback: feedback))
+                .edgesIgnoringSafeArea(.all)
+//                .ignoresSafeArea(edges: .all)
         }
     }
 

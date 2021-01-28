@@ -14,7 +14,9 @@ struct AllQuestionAndAnswersRowView: View {
     var title: String = NSLocalizedString("FAQ", bundle: .module, comment: "")
 
     var body: some View {
-        SettingsRow(title: self.title, systemImage: "questionmark", color: self.color, destination: { AllQuestionAndAnswersView(viewModel: self.viewModel) })
+        SettingsRow(
+            title: self.title, systemImage: "questionmark", color: self.color,
+            destination: { AllQuestionAndAnswersView(viewModel: self.viewModel) })
     }
 }
 
@@ -22,7 +24,9 @@ public struct QuestionAndAnswer: Identifiable {
     public let title: String
     public let content: String
 
-    public init(title: String, content: String) {
+    public init(
+        title: String, content: String
+    ) {
         self.title = title
         self.content = content
     }
@@ -44,9 +48,18 @@ struct SingleQuestionAndAnswerView: View {
     let questionAndAnswer: QuestionAndAnswer
 
     var body: some View {
-        DisclosureGroup(
-            content: { Text(self.questionAndAnswer.content) },
-            label: { Text(self.questionAndAnswer.title) })
+        Group {
+            if #available(iOS 14, *) {
+                DisclosureGroup(
+                    content: { Text(self.questionAndAnswer.content) },
+                    label: { Text(self.questionAndAnswer.title) })
+            } else {
+                Section {
+                    Text(self.questionAndAnswer.title)
+                    Text(self.questionAndAnswer.content)
+                }
+            }
+        }
     }
 }
 
@@ -66,6 +79,10 @@ struct AllQuestionAndAnswersView: View {
 
 struct AllQuestionAndAnswersViewView_Previews: PreviewProvider {
     static var previews: some View {
-        AllQuestionAndAnswersView(viewModel: QuestionAndAnswerViewModel(questionAndAnswers: [QuestionAndAnswer(title: "A", content: "B")]))
+        AllQuestionAndAnswersView(
+            viewModel: QuestionAndAnswerViewModel(questionAndAnswers: [
+                QuestionAndAnswer(title: "A", content: "B"),
+                QuestionAndAnswer(title: "X", content: "Y"),
+            ]))
     }
 }

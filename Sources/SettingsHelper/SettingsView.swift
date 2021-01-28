@@ -37,7 +37,7 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
             Form {
                 topFormContent()
                 Section(
-                    header: Label(
+                    header: CompatibleLabel(
                         NSLocalizedString("Contact", bundle: .module, comment: ""),
                         systemImage: "envelope.fill")
                 ) {
@@ -50,7 +50,7 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
                     .createQuestionAndAnswerViewModel()
                 {
                     Section(
-                        header: Label(
+                        header: CompatibleLabel(
                             NSLocalizedString("FAQ", bundle: .module, comment: ""),
                             systemImage: "questionmark.circle.fill")
                     ) {
@@ -61,7 +61,7 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
                 }
 
                 Section(
-                    header: Label(
+                    header: CompatibleLabel(
                         NSLocalizedString("Legal", bundle: Bundle.module, comment: ""),
                         systemImage: "books.vertical.fill")
                 ) {
@@ -94,7 +94,7 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
                     EmptyView()
                 }
             }
-            .navigationTitle(NSLocalizedString("Settings", bundle: .module, comment: ""))
+            .modifier(CompatibleNavigationTitle(title: NSLocalizedString("Settings", bundle: .module, comment: "")))
 
             DetailNothingSelectedView()
         }
@@ -178,7 +178,7 @@ struct SettingsView_Previews: PreviewProvider {
             )
             .previewDevice("iPhone 12 Pro")
             .environment(\.colorScheme, .dark)
-            // Localization in Preview only works for SwiftUI components like Text. NSLocalizedStrings won't be displayed correctly this way.
+//             Localization in Preview only works for SwiftUI components like Text. NSLocalizedStrings won't be displayed correctly this way.
             .environment(\.locale, Locale.init(identifier: "de"))
         }
     }
