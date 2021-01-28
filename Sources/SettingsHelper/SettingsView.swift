@@ -178,6 +178,7 @@ struct SettingsView_Previews: PreviewProvider {
             )
             .previewDevice("iPhone 12 Pro")
             .environment(\.colorScheme, .dark)
+            // Localization in Preview only works for SwiftUI components like Text. NSLocalizedStrings won't be displayed correctly this way.
             .environment(\.locale, Locale.init(identifier: "de"))
         }
     }
