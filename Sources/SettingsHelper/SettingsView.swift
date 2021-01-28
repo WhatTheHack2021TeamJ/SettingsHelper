@@ -5,7 +5,9 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
     private let topFormContent: () -> TopFormContent
     private let bottomFormContent: () -> BottomFormContent
 
-    public init(settings: SettingsConfiguration) where TopFormContent == EmptyView, BottomFormContent == EmptyView {
+    public init(
+        settings: SettingsConfiguration
+    ) where TopFormContent == EmptyView, BottomFormContent == EmptyView {
         self.settings = settings
         self.topFormContent = { EmptyView() }
         self.bottomFormContent = { EmptyView() }
@@ -34,17 +36,35 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
         NavigationView {
             Form {
                 topFormContent()
-                Section(header: Label(NSLocalizedString("Contact", bundle: .module, comment: ""), systemImage: "envelope.fill")) {
-                    FeedbackRow(feedbackViewModel: self.settings.createFeedbackViewModel(), color: self.settings.settingsIconColors.feedbackColor)
+                Section(
+                    header: Label(
+                        NSLocalizedString("Contact", bundle: .module, comment: ""),
+                        systemImage: "envelope.fill")
+                ) {
+                    FeedbackRow(
+                        feedbackViewModel: self.settings.createFeedbackViewModel(),
+                        color: self.settings.settingsIconColors.feedbackColor)
                 }
 
-                if let questionsAndAnswersViewModel = self.settings.createQuestionAndAnswerViewModel() {
-                    Section(header: Label(NSLocalizedString("FAQ", bundle: .module, comment: ""), systemImage: "questionmark.circle.fill")) {
-                        AllQuestionAndAnswersRowView(viewModel: questionsAndAnswersViewModel, color: self.settings.settingsIconColors.faqColor)
+                if let questionsAndAnswersViewModel = self.settings
+                    .createQuestionAndAnswerViewModel()
+                {
+                    Section(
+                        header: Label(
+                            NSLocalizedString("FAQ", bundle: .module, comment: ""),
+                            systemImage: "questionmark.circle.fill")
+                    ) {
+                        AllQuestionAndAnswersRowView(
+                            viewModel: questionsAndAnswersViewModel,
+                            color: self.settings.settingsIconColors.faqColor)
                     }
                 }
 
-                Section(header: Label(NSLocalizedString("Legal", bundle: .module, comment: ""), systemImage: "books.vertical.fill")) {
+                Section(
+                    header: Label(
+                        NSLocalizedString("Legal", bundle: Bundle.module, comment: ""),
+                        systemImage: "books.vertical.fill")
+                ) {
                     if self.settings.shouldShowLicense {
                         LicensesRow(
                             licenses: self.settings.createLicenseViewModel().getLicenses() ?? [],
@@ -52,18 +72,24 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
                         )
                     }
                     if let creditsViewModel = self.settings.createCreditsViewModel() {
-                        CreditsRow(creditsViewModel: creditsViewModel, color: self.settings.settingsIconColors.creditsColor)
+                        CreditsRow(
+                            creditsViewModel: creditsViewModel,
+                            color: self.settings.settingsIconColors.creditsColor)
                     }
                     if let dataPrivacyViewModel = self.settings.createDataPrivacyViewModel() {
-                        DataPrivacyRow(dataPrivacyViewModel: dataPrivacyViewModel, color: self.settings.settingsIconColors.dataPrivacyColor)
+                        DataPrivacyRow(
+                            dataPrivacyViewModel: dataPrivacyViewModel,
+                            color: self.settings.settingsIconColors.dataPrivacyColor)
                     }
                     if let impressumViewModel = self.settings.createImpressumViewModel() {
-                        ImpressumRow(impressumViewModel: impressumViewModel, color: self.settings.settingsIconColors.impressumColor)
+                        ImpressumRow(
+                            impressumViewModel: impressumViewModel,
+                            color: self.settings.settingsIconColors.impressumColor)
                     }
                 }
-                
+
                 bottomFormContent()
-                
+
                 Section(footer: VersionFooterView(version: VersionFooterModel())) {
                     EmptyView()
                 }
@@ -122,11 +148,13 @@ struct SettingsView_Previews: PreviewProvider {
                     questionsAndAnswers: [
                         QuestionAndAnswer(title: "What is this?", content: "This is a test.")
                     ],
-                    impressumOption: .useImpressum(SettingsImpressumContact(
-                                                    fullName: "First Last", streetAndHouseNumber: "Street 123",
-                                                    postalCodeAndCity: "12345 City", phoneNumber: "+12 239293293",
-                                                    email: "settings@test.com"))))
-                .environment(\.colorScheme, .dark)
+                    impressumOption: .useImpressum(
+                        SettingsImpressumContact(
+                            fullName: "First Last", streetAndHouseNumber: "Street 123",
+                            postalCodeAndCity: "12345 City", phoneNumber: "+12 239293293",
+                            email: "settings@test.com")))
+            )
+            .environment(\.colorScheme, .dark)
 
             SettingsView(
                 settings: SettingsConfiguration(
@@ -148,9 +176,9 @@ struct SettingsView_Previews: PreviewProvider {
                     settingsSytleOption: .colorfulIcon(SettingsColorfulIconColors.basic)
                 )
             )
-                .previewDevice("iPhone 12 Pro")
-                .environment(\.colorScheme, .dark)
-                .environment(\.locale, Locale.init(identifier: "de"))
+            .previewDevice("iPhone 12 Pro")
+            .environment(\.colorScheme, .dark)
+            .environment(\.locale, Locale.init(identifier: "de"))
         }
     }
 }
