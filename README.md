@@ -59,7 +59,10 @@ struct ContentView: View {
 }
 ```
 
-Let's look at each parameter a littler closer.
+> Keep in mind that the framework allows you to include your own sections.
+> In particular, if you want to include your own sections in the top or bottom section you'll want to create them using the public init that will declare `TopFormContent` or `BottomFormContent`.
+
+### Let's look at each parameter a littler closer.
 
 ##### `email`
 
