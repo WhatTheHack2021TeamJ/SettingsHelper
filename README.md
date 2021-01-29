@@ -67,7 +67,7 @@ This is a string value representing the email you would like to be reached at.
 
 ##### `licenseUsage`
 
-The LicenseOptions will either be `.none` or `.useGeneratedLicenses()`. If you choose the latter the framework will not include this section in your settings.
+The LicenseOptions will either be `.none` or `.useGeneratedLicenses()`. If you choose the former the framework will not include this section in your settings.
 
 > This project uses an auto generation of any Licenses inside of the Source Packages folder. Gone are the days of making individual views and copy pasting that MIT License over.
 
@@ -77,11 +77,11 @@ Your bundle that will be used. By default `.main` is recommended.
 
 ##### `creditsUsage`
 
-The CreditsOptions will either be `.none` or `.useCredits()`. If you choose the latter the framework will not include this section in your settings.
+The CreditsOptions will either be `.none` or `.useCredits()`. If you choose the former the framework will not include this section in your settings.
 
 ##### `dataPrivacyUsage`
 
-The DataPrivacyOptions will either be `.none` or `.useDataPrivacy()`. If you choose the latter the framework will not include this section in your settings.
+The DataPrivacyOptions will either be `.none` or `.useDataPrivacy()`. If you choose the former the framework will not include this section in your settings.
 
 ##### `questionsAndAnswers`
 
