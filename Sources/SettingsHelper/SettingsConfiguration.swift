@@ -26,7 +26,7 @@ public enum SettingsSytleOption {
     var settingsIconColors: SettingsIconColors {
         switch self {
         case .normal:
-            return DefaultSettingsIconColor()
+            return SettingsIconColorsPlain()
         case .colorfulIcon(let settingsIconColors):
             return settingsIconColors
         }
@@ -46,7 +46,7 @@ public protocol SettingsIconColors {
     var impressumColor: Color? { get }
 }
 
-public struct SettingsColorfulIconColors: SettingsIconColors {
+public struct SettingsIconColorsColorful: SettingsIconColors {
     public let creditsColor: Color?
     public let dataPrivacyColor: Color?
     public let faqColor: Color?
@@ -63,10 +63,10 @@ public struct SettingsColorfulIconColors: SettingsIconColors {
         self.impressumColor = impressumColor
     }
 
-    public static let basic: SettingsColorfulIconColors = SettingsColorfulIconColors(creditsColor: .red, dataPrivacyColor: .green, faqColor: .gray, feedbackColor: .blue, licenseColor: .purple, impressumColor: .orange)
+    public static let basic: SettingsIconColorsColorful = SettingsIconColorsColorful(creditsColor: .red, dataPrivacyColor: .green, faqColor: .gray, feedbackColor: .blue, licenseColor: .purple, impressumColor: .orange)
 }
 
-public struct DefaultSettingsIconColor: SettingsIconColors {
+public struct SettingsIconColorsPlain: SettingsIconColors {
     public var creditsColor: Color? = nil
     public var dataPrivacyColor: Color? = nil
     public var faqColor: Color? = nil

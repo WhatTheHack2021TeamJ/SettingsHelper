@@ -35,7 +35,7 @@ struct ContentView: View {
                             postalCodeAndCity: "12345 City", phoneNumber: "+12 239293293",
                             email: "settings@test.com")
                     ),
-                    settingsSytleOption: .colorfulIcon(SettingsColorfulIconColors.basic)
+                    settingsSytleOption: .colorfulIcon(SettingsIconColorsColoful.basic)
                 )
             ) {
 

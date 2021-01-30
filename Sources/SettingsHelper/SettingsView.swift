@@ -173,7 +173,7 @@ struct SettingsView_Previews: PreviewProvider {
                             email: "settings@test.com"
                         )
                     ),
-                    settingsSytleOption: .colorfulIcon(SettingsColorfulIconColors.basic)
+                    settingsSytleOption: .colorfulIcon(SettingsIconColorsColorful.basic)
                 )
             )
             .previewDevice("iPhone 12 Pro")

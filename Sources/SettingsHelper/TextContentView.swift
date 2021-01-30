@@ -67,18 +67,25 @@ public protocol SettingsContent {
     var content: String? { get }
 }
 
-public struct SettingsFile: SettingsContent {
-    public let resource: String
-    public let fileExtension: String
+public struct SettingsContentFile: SettingsContent {
+    private let fileUrl: URL?
+
+    public init(resource: String, fileExtension: String) {
+        self.fileUrl = Bundle.main.url(forResource: resource, withExtension: fileExtension)
+    }
+
+    public init(fileUrl: URL) {
+        self.fileUrl = fileUrl
+    }
 
     public var content: String? {
-        guard let fileURL = Bundle.main.url(forResource: self.resource, withExtension: self.fileExtension) else { return nil }
+        guard let fileURL = self.fileUrl else { return nil }
         guard let content = try? String(contentsOf: fileURL) else { return nil }
         return content
     }
 }
 
-public struct StaticTextContent: SettingsContent {
+public struct SettingsContentStaticText: SettingsContent {
     private let _content: String
     public var content: String? {
         return self._content
