@@ -5,7 +5,9 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
     private let topFormContent: () -> TopFormContent
     private let bottomFormContent: () -> BottomFormContent
 
-    public init(settings: SettingsConfiguration) where TopFormContent == EmptyView, BottomFormContent == EmptyView {
+    public init(
+        settings: SettingsConfiguration
+    ) where TopFormContent == EmptyView, BottomFormContent == EmptyView {
         self.settings = settings
         self.topFormContent = { EmptyView() }
         self.bottomFormContent = { EmptyView() }
@@ -34,17 +36,35 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
         NavigationView {
             Form {
                 topFormContent()
-                Section(header: Label("Contact", systemImage: "envelope.fill")) {
-                    FeedbackRow(feedbackViewModel: self.settings.createFeedbackViewModel(), color: self.settings.settingsIconColors.feedbackColor)
+                Section(
+                    header: CompatibleLabel(
+                        NSLocalizedString("Contact", bundle: .module, comment: ""),
+                        systemImage: "envelope.fill")
+                ) {
+                    FeedbackRow(
+                        feedbackViewModel: self.settings.createFeedbackViewModel(),
+                        color: self.settings.settingsIconColors.feedbackColor)
                 }
 
-                if let questionsAndAnswersViewModel = self.settings.createQuestionAndAnswerViewModel() {
-                    Section(header: Label("FAQ", systemImage: "questionmark.circle.fill")) {
-                        AllQuestionAndAnswersRowView(viewModel: questionsAndAnswersViewModel, color: self.settings.settingsIconColors.faqColor)
+                if let questionsAndAnswersViewModel = self.settings
+                    .createQuestionAndAnswerViewModel()
+                {
+                    Section(
+                        header: CompatibleLabel(
+                            NSLocalizedString("FAQ", bundle: .module, comment: ""),
+                            systemImage: "questionmark.circle.fill")
+                    ) {
+                        AllQuestionAndAnswersRowView(
+                            viewModel: questionsAndAnswersViewModel,
+                            color: self.settings.settingsIconColors.faqColor)
                     }
                 }
 
-                Section(header: Label("Legal", systemImage: "books.vertical.fill")) {
+                Section(
+                    header: CompatibleLabel(
+                        NSLocalizedString("Legal", bundle: Bundle.module, comment: ""),
+                        systemImage: "books.vertical.fill")
+                ) {
                     if self.settings.shouldShowLicense {
                         LicensesRow(
                             licenses: self.settings.createLicenseViewModel().getLicenses() ?? [],
@@ -52,20 +72,29 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
                         )
                     }
                     if let creditsViewModel = self.settings.createCreditsViewModel() {
-                        CreditsRow(creditsViewModel: creditsViewModel, color: self.settings.settingsIconColors.creditsColor)
+                        CreditsRow(
+                            creditsViewModel: creditsViewModel,
+                            color: self.settings.settingsIconColors.creditsColor)
                     }
                     if let dataPrivacyViewModel = self.settings.createDataPrivacyViewModel() {
-                        DataPrivacyRow(dataPrivacyViewModel: dataPrivacyViewModel, color: self.settings.settingsIconColors.dataPrivacyColor)
+                        DataPrivacyRow(
+                            dataPrivacyViewModel: dataPrivacyViewModel,
+                            color: self.settings.settingsIconColors.dataPrivacyColor)
+                    }
+                    if let impressumViewModel = self.settings.createImpressumViewModel() {
+                        ImpressumRow(
+                            impressumViewModel: impressumViewModel,
+                            color: self.settings.settingsIconColors.impressumColor)
                     }
                 }
-                
+
                 bottomFormContent()
-                
+
                 Section(footer: VersionFooterView(version: VersionFooterModel())) {
                     EmptyView()
                 }
             }
-            .navigationTitle("Settings")
+            .modifier(CompatibleNavigationTitle(title: NSLocalizedString("Settings", bundle: .module, comment: "")))
 
             DetailNothingSelectedView()
         }
@@ -94,10 +123,10 @@ struct DetailNothingSelectedView: View {
                         self.isAnimating = true
                     }
 
-                Text("Settings")
+                Text("Settings", bundle: .module)
                     .bold()
                     .font(.largeTitle)
-                Text("You can select an option in the Settings view.")
+                Text("You can select an option in the Settings view.", bundle: .module)
                     .foregroundColor(Color(UIColor.tertiaryLabel))
                 Spacer()
             }
@@ -110,14 +139,47 @@ struct DetailNothingSelectedView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(
-            settings: SettingsConfiguration(
-                email: "settings@whatthehack.com",
-                creditsUsage: .useCredits(StaticTextContent(content: "Test")),
-                dataPrivacyUsage: .useDataPrivacy(StaticTextContent(content: "Data Privacy")),
-                questionsAndAnswers: [
-                    QuestionAndAnswer(title: "What is this?", content: "This is a test.")
-                ]))
+        Group {
+            SettingsView(
+                settings: SettingsConfiguration(
+                    email: "settings@whatthehack.com",
+                    creditsUsage: .useCredits(StaticTextContent(content: "Test")),
+                    dataPrivacyUsage: .useDataPrivacy(StaticTextContent(content: "Data Privacy")),
+                    questionsAndAnswers: [
+                        QuestionAndAnswer(title: "What is this?", content: "This is a test.")
+                    ],
+                    impressumOption: .useImpressum(
+                        SettingsImpressumContact(
+                            fullName: "First Last", streetAndHouseNumber: "Street 123",
+                            postalCodeAndCity: "12345 City", phoneNumber: "+12 239293293",
+                            email: "settings@test.com")))
+            )
             .environment(\.colorScheme, .dark)
+
+            SettingsView(
+                settings: SettingsConfiguration(
+                    email: "settings@whatthehack.com",
+                    creditsUsage: .useCredits(StaticTextContent(content: "Test")),
+                    dataPrivacyUsage: .useDataPrivacy(StaticTextContent(content: "Data Privacy")),
+                    questionsAndAnswers: [
+                        QuestionAndAnswer(title: "What is this?", content: "This is a test.")
+                    ],
+                    impressumOption: .useImpressum(
+                        SettingsImpressumContact(
+                            fullName: "First Last",
+                            streetAndHouseNumber: "Street 123",
+                            postalCodeAndCity: "12345 City",
+                            phoneNumber: "+12 239293293",
+                            email: "settings@test.com"
+                        )
+                    ),
+                    settingsSytleOption: .colorfulIcon(SettingsColorfulIconColors.basic)
+                )
+            )
+            .previewDevice("iPhone 12 Pro")
+            .environment(\.colorScheme, .dark)
+//             Localization in Preview only works for SwiftUI components like Text. NSLocalizedStrings won't be displayed correctly this way.
+            .environment(\.locale, Locale.init(identifier: "de"))
+        }
     }
 }

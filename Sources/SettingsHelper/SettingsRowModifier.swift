@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 14, *)
 public struct ColorfulIconLabelStyle: LabelStyle {
     public var color: Color
     public var size: CGFloat
@@ -22,9 +23,10 @@ public struct ColorfulIconLabelStyle: LabelStyle {
     }
 }
 
+@available(iOS 14, *)
 public struct SettingsRowModifier: ViewModifier {
+    @ScaledMetric var size: CGFloat = 1
     let color: Color?
-    let size: CGFloat
 
     public func body(content: Content) -> some View {
         Group {

@@ -5,7 +5,8 @@ import PackageDescription
 
 let package = Package(
     name: "SettingsHelper",
-    platforms: [.iOS(.v14), .macOS(.v11)],
+    defaultLocalization: "en",
+    platforms: [.iOS(.v13), .macOS(.v11)],
     products: [
         .library(
             name: "SettingsHelper",
@@ -19,7 +20,9 @@ let package = Package(
     targets: [
         .target(
             name: "SettingsHelper",
-            dependencies: []),
+            dependencies: [],
+            resources: [.process("Resources")]
+        ),
         .target(
             name: "SettingsHelperGenerator",
             dependencies: [])

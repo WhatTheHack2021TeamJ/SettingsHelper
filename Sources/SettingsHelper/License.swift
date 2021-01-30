@@ -11,7 +11,7 @@ struct LicensesRow: View {
     var licenses: [License]
     var color: Color?
     
-    var title: LocalizedStringKey = "Licenses"
+    var title: String = NSLocalizedString("Licenses", bundle: .module, comment: "")
 
     var body: some View {
         SettingsRow(
@@ -32,7 +32,7 @@ struct LicensesPage: View {
             ForEach(licenses) { license in
                 LicenseDetails(license: license)
             }
-        }.listStyle(InsetGroupedListStyle())
+        }.modifier(ListStyleModifier())
     }
 }
 
@@ -52,9 +52,9 @@ struct LicenseDetails: View {
     var body: some View {
         NavigationLink(
             destination: ScrollView { Text(license.fullText).padding() }
-                .navigationTitle(license.title),
+                .modifier(CompatibleNavigationTitle(title: license.title)),
             label: {
-                Label(license.title, systemImage: "doc")
+                CompatibleLabel(license.title, systemImage: "doc")
             })
     }
 }
