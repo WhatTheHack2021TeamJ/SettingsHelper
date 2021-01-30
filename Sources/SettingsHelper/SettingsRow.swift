@@ -10,12 +10,12 @@ import SwiftUI
 public struct SettingsRow<Destination: View>: View {
     @ScaledMetric var size: CGFloat = 1
 
-    public let title: LocalizedStringKey
+    public let title: String
     public let systemImage: String
     public let destination: () -> Destination
     public let color: Color?
 
-    public init(title: LocalizedStringKey, systemImage: String, color: Color?, @ViewBuilder destination: @escaping () -> Destination) {
+    public init(title: String, systemImage: String, color: Color?, @ViewBuilder destination: @escaping () -> Destination) {
         self.title = title
         self.systemImage = systemImage
         self.destination = destination

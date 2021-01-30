@@ -11,7 +11,7 @@ struct AllQuestionAndAnswersRowView: View {
     @ObservedObject var viewModel: QuestionAndAnswerViewModel
     var color: Color?
 
-    var title: LocalizedStringKey = "FAQ"
+    var title: String = NSLocalizedString("FAQ", bundle: .module, comment: "")
 
     var body: some View {
         SettingsRow(title: self.title, systemImage: "questionmark", color: self.color, destination: { AllQuestionAndAnswersView(viewModel: self.viewModel) })

@@ -27,6 +27,8 @@ You can also add SettingsHelper by navigating in Xcode to *File > Swift Packages
 
 > **Note**: SettingsHelper will only currently only work with Swift Packages. it relies on the folder structure of the Swift Packages to make sure that the files are where they should be.
 
+If you want to use SettingsHelper's localization, make sure that you have `CFBundleAllowMixedLocalizations` set to `YES` in your *Info.plist*.
+
 ## Usage
 
 SettingsHelper uses a configuration file to set up the Settings View.

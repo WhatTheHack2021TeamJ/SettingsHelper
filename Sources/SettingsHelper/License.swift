@@ -11,7 +11,7 @@ struct LicensesRow: View {
     var licenses: [License]
     var color: Color?
     
-    var title: LocalizedStringKey = "Licenses"
+    var title: String = NSLocalizedString("Licenses", bundle: .module, comment: "")
 
     var body: some View {
         SettingsRow(
