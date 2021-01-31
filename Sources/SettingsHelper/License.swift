@@ -32,7 +32,7 @@ struct LicensesPage: View {
             ForEach(licenses) { license in
                 LicenseDetails(license: license)
             }
-        }.listStyle(InsetGroupedListStyle())
+        }.modifier(ListStyleModifier())
     }
 }
 
@@ -52,9 +52,9 @@ struct LicenseDetails: View {
     var body: some View {
         NavigationLink(
             destination: ScrollView { Text(license.fullText).padding() }
-                .navigationTitle(license.title),
+                .modifier(CompatibleNavigationTitle(title: license.title)),
             label: {
-                Label(license.title, systemImage: "doc")
+                CompatibleLabel(license.title, systemImage: "doc")
             })
     }
 }
