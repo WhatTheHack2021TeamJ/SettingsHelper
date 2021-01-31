@@ -20,6 +20,7 @@ public struct CompatibleLabel: View {
         Group {
             if #available(iOS 14, *) {
                 Label(title, systemImage: name)
+                    .textCase(nil)
             } else {
                 HStack {
                     Image(systemName: name)
