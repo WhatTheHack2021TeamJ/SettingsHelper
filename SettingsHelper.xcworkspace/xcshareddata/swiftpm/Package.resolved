@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "ButteredToast",
-        "repositoryURL": "git@github.com:Yonodactyl/ButteredToast.git",
+        "repositoryURL": "https://github.com/Yonodactyl/ButteredToast.git",
         "state": {
-          "branch": null,
-          "revision": "ce4828aa320ad420de61a19c4b92cda281e66da8",
-          "version": "0.0.2"
+          "branch": "main",
+          "revision": "c8b52a5a56192cecb0d10468409beb1ca39f0752",
+          "version": null
         }
       },
       {
