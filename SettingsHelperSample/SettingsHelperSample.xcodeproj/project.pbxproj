@@ -13,6 +13,7 @@
 		5C68DF8125B3A130006FF5DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C68DF8025B3A130006FF5DF /* Preview Assets.xcassets */; };
 		BA6B671B25B4B83C007C7174 /* ConfettiView in Frameworks */ = {isa = PBXBuildFile; productRef = BA6B671A25B4B83C007C7174 /* ConfettiView */; };
 		BA8F67F425BF9C80008A03C3 /* SettingsHelper in Frameworks */ = {isa = PBXBuildFile; productRef = BA8F67F325BF9C80008A03C3 /* SettingsHelper */; };
+		ED40734C25C7455500C93CC4 /* ButteredToast in Frameworks */ = {isa = PBXBuildFile; productRef = ED40734B25C7455500C93CC4 /* ButteredToast */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED40734C25C7455500C93CC4 /* ButteredToast in Frameworks */,
 				BA6B671B25B4B83C007C7174 /* ConfettiView in Frameworks */,
 				BA8F67F425BF9C80008A03C3 /* SettingsHelper in Frameworks */,
 			);
@@ -103,6 +105,7 @@
 			packageProductDependencies = (
 				BA6B671A25B4B83C007C7174 /* ConfettiView */,
 				BA8F67F325BF9C80008A03C3 /* SettingsHelper */,
+				ED40734B25C7455500C93CC4 /* ButteredToast */,
 			);
 			productName = SettingsHelperSample;
 			productReference = 5C68DF7625B3A12A006FF5DF /* SettingsHelperSample.app */;
@@ -133,10 +136,10 @@
 			);
 			mainGroup = 5C68DF6D25B3A12A006FF5DF;
 			packageReferences = (
-				BA99999B25B3CA3200F7A403 /* XCRemoteSwiftPackageReference "ButteredToast" */,
 				5CA25CE925B3E308003AC737 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 				5CA25CED25B3E339003AC737 /* XCRemoteSwiftPackageReference "swift-nio" */,
 				BA6B671925B4B83C007C7174 /* XCRemoteSwiftPackageReference "ConfettiView" */,
+				ED40734A25C7455500C93CC4 /* XCRemoteSwiftPackageReference "ButteredToast" */,
 			);
 			productRefGroup = 5C68DF7725B3A12A006FF5DF /* Products */;
 			projectDirPath = "";
@@ -406,12 +409,12 @@
 				minimumVersion = 1.0.1;
 			};
 		};
-		BA99999B25B3CA3200F7A403 /* XCRemoteSwiftPackageReference "ButteredToast" */ = {
+		ED40734A25C7455500C93CC4 /* XCRemoteSwiftPackageReference "ButteredToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:Yonodactyl/ButteredToast.git";
+			repositoryURL = "https://github.com/Yonodactyl/ButteredToast.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.1;
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -425,6 +428,11 @@
 		BA8F67F325BF9C80008A03C3 /* SettingsHelper */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SettingsHelper;
+		};
+		ED40734B25C7455500C93CC4 /* ButteredToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED40734A25C7455500C93CC4 /* XCRemoteSwiftPackageReference "ButteredToast" */;
+			productName = ButteredToast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
