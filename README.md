@@ -49,8 +49,8 @@ struct ContentView: View {
                     email: "test@test.com",
                     licenseUsage: .useGeneratedLicenses,
                     bundle: .main,
-                    creditsUsage: .useCredits(StaticTextContent(content: "Thanks to everyone at WhatTheHack 2021 Hackathon 😊🎉")),
-                    dataPrivacyUsage: .useDataPrivacy(StaticTextContent(content: "We sell all your data.")),
+                    creditsUsage: .useCredits(SettingsContentStaticText(content: "Thanks to everyone at WhatTheHack 2021 Hackathon 😊🎉")),
+                    dataPrivacyUsage: .useDataPrivacy(SettingsContentStaticText(content: "We sell all your data.")),
                     questionsAndAnswers:
                         [QuestionAndAnswer(title: "Who will win the prizes?", content: "Good question. That will be the settings framework.")]
                 )

@@ -143,8 +143,8 @@ struct SettingsView_Previews: PreviewProvider {
             SettingsView(
                 settings: SettingsConfiguration(
                     email: "settings@whatthehack.com",
-                    creditsUsage: .useCredits(StaticTextContent(content: "Test")),
-                    dataPrivacyUsage: .useDataPrivacy(StaticTextContent(content: "Data Privacy")),
+                    creditsUsage: .useCredits(SettingsContentStaticText(content: "Test")),
+                    dataPrivacyUsage: .useDataPrivacy(SettingsContentStaticText(content: "Data Privacy")),
                     questionsAndAnswers: [
                         QuestionAndAnswer(title: "What is this?", content: "This is a test.")
                     ],
@@ -159,8 +159,8 @@ struct SettingsView_Previews: PreviewProvider {
             SettingsView(
                 settings: SettingsConfiguration(
                     email: "settings@whatthehack.com",
-                    creditsUsage: .useCredits(StaticTextContent(content: "Test")),
-                    dataPrivacyUsage: .useDataPrivacy(StaticTextContent(content: "Data Privacy")),
+                    creditsUsage: .useCredits(SettingsContentStaticText(content: "Test")),
+                    dataPrivacyUsage: .useDataPrivacy(SettingsContentStaticText(content: "Data Privacy")),
                     questionsAndAnswers: [
                         QuestionAndAnswer(title: "What is this?", content: "This is a test.")
                     ],
@@ -173,7 +173,7 @@ struct SettingsView_Previews: PreviewProvider {
                             email: "settings@test.com"
                         )
                     ),
-                    settingsSytleOption: .colorfulIcon(SettingsColorfulIconColors.basic)
+                    settingsSytleOption: .colorfulIcon(SettingsIconColorsColorful.basic)
                 )
             )
             .previewDevice("iPhone 12 Pro")

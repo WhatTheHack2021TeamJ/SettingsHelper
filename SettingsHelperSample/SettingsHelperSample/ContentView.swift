@@ -20,10 +20,10 @@ struct ContentView: View {
                     licenseUsage: .useGeneratedLicenses,
                     bundle: .main,
                     creditsUsage: .useCredits(
-                        StaticTextContent(
+                        SettingsContentStaticText(
                             content: "Thanks to everyone at WhatTheHack 2021 Hackathon 😊🎉")),
                     dataPrivacyUsage: .useDataPrivacy(
-                        StaticTextContent(content: "We sell all your data.")),
+                        SettingsContentStaticText(content: "We sell all your data.")),
                     questionsAndAnswers: [
                         QuestionAndAnswer(
                             title: "Who will win the prizes?",
@@ -35,7 +35,7 @@ struct ContentView: View {
                             postalCodeAndCity: "12345 City", phoneNumber: "+12 239293293",
                             email: "settings@test.com")
                     ),
-                    settingsSytleOption: .colorfulIcon(SettingsColorfulIconColors.basic)
+                    settingsSytleOption: .colorfulIcon(SettingsIconColorsColorful.basic)
                 )
             ) {
 
