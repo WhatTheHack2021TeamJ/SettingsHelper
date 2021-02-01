@@ -98,7 +98,6 @@ public struct SettingsView<TopFormContent: View, BottomFormContent: View>: View 
 
             DetailNothingSelectedView()
         }
-        .navigationViewStyle(DoubleColumnNavigationViewStyle())
     }
 }
 
